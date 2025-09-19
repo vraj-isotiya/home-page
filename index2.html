@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landscape Lighting</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #2c3e50;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Carousel Section */
+      .carousel-section {
+        position: relative;
+        border-radius: 20px;
+        margin-bottom: 40px;
+        overflow: hidden;
+        height: 500px;
+      }
+
+      .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .carousel-slide.active {
+        opacity: 1;
+      }
+
+      .carousel-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+      }
+
+      .carousel-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .carousel-overlay p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        line-height: 1.7;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .carousel-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .btn {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+      }
+
+      .btn-primary {
+        background-color: #cd3838;
+        color: #e9e6dd;
+      }
+
+      .btn-primary:hover {
+        background-color: #d32f2f;
+      }
+
+      .btn-secondary {
+        background-color: #e9e6dd;
+        color: #454136;
+        border: 2px solid white;
+      }
+
+      .btn-secondary:hover {
+        background-color: #29323d;
+        border-color: #29323d;
+        color: #cec8b4;
+      }
+
+      .carousel-controls {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        z-index: 3;
+      }
+
+      .carousel-nav {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(44, 62, 80, 0.8);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .carousel-nav:hover {
+        background-color: #ed3939;
+      }
+
+      .carousel-indicators {
+        display: flex;
+        gap: 10px;
+      }
+
+      .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .indicator.active {
+        background-color: white;
+      }
+
+      /* Cards Section */
+      .cards-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .card {
+        background-color: #34495e;
+        border-radius: 15px;
+        padding: 30px;
+        position: relative;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: flex-start;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .card:hover::before {
+        left: 100%;
+      }
+
+      .card:hover {
+        background-color: rgba(205, 56, 56, 0.7);
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(237, 57, 57, 0.3);
+      }
+
+      .card-icon {
+        flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        transition: all 0.3s ease;
+      }
+
+      .card-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .card:hover .card-icon svg path {
+        stroke: white;
+      }
+
+      .card-content {
+        flex: 1;
+      }
+
+      .card-content h2 {
+        font-size: 1.6rem;
+        color: white;
+        margin-bottom: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .card-content ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .card-content li {
+        color: #bdc3c7;
+        margin-bottom: 8px;
+        transition: color 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .card:hover .card-content li {
+        color: white;
+      }
+
+      /* Right-side arrow */
+      .card-arrow {
+        position: absolute;
+        top: 90%;
+        right: 30px;
+        transform: translateY(-50%) translateX(10px);
+        font-size: 30px;
+        color: #fff;
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+
+      .card:hover .card-arrow {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+
+      .lighting-distribution {
+        color: #b2ad9c;
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      .lighting-distribution .section-title {
+        font-size: 50px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+      }
+
+      .lighting-distribution .section-subtitle {
+        max-width: 850px;
+        margin: 0 auto 60px;
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .features {
+        display: flex;
+        justify-content: center;
+      }
+
+      .feature-item {
+        width: 100%;
+      }
+
+      .feature-item i {
+        font-size: 40px;
+        margin-bottom: 20px;
+        color: #c8c3b3;
+      }
+
+      .feature-item h3 {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .feature-item p {
+        font-size: 15px;
+        margin: 0;
+        opacity: 0.9;
+      }
+
+      /* Optional: add a subtle divider between items on large screens */
+      @media (min-width: 768px) {
+        .feature-item {
+          position: relative;
+          padding: 0 30px;
+        }
+        .feature-item:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 10%;
+          height: 90%;
+          width: 2px;
+          background: rgba(200, 195, 179, 0.3);
+        }
+        .feature-item-price {
+          padding: 0 20px;
+        }
+      }
+
+      /* Experience Section */
+      .experience-section {
+        background-color: #34495e;
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 40px;
+      }
+
+      .experience-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .experience-header h2 {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .experience-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .experience-tab {
+        padding: 12px 24px;
+        background-color: transparent;
+        border: 2px solid #bdc3c7;
+        border-radius: 25px;
+        color: #bdc3c7;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .experience-tab:hover {
+        border-color: #ed3939;
+        color: #ed3939;
+      }
+
+      .experience-tab.active {
+        background-color: #ed3939;
+        border-color: #ed3939;
+        color: white;
+      }
+
+      .experience-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .experience-image-wrapper {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .experience-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .markers-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .marker {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: #ed3939;
+        border: 3px solid white;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 12px rgba(237, 57, 57, 0.4);
+      }
+
+      .marker:hover {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 6px 16px rgba(237, 57, 57, 0.6);
+      }
+
+      .marker i {
+        color: white;
+        font-size: 16px;
+      }
+
+      .marker::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #ed3939;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.8);
+          opacity: 0;
+        }
+      }
+
+      /* customer review */
+      .tt-testimonial-section {
+        padding: 4rem 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .tt-section-header {
+        margin-bottom: 3rem;
+      }
+
+      .tt-section-header h2 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #cec8b4;
+      }
+
+      .tt-carousel-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tt-carousel-wrapper {
+        width: 100%;
+        max-width: 900px;
+        overflow: hidden;
+      }
+
+      .tt-carousel {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        transition: transform 0.5s ease-in-out;
+        padding: 2rem 0;
+        gap: 2rem;
+      }
+
+      .tt-testimonial-card {
+        min-width: 300px;
+        max-width: 450px;
+        background-color: #34495e;
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transition: all 0.5s ease-in-out;
+        opacity: 0.5;
+        transform: scale(0.85);
+        text-align: left;
+        position: relative;
+        z-index: 10;
+        filter: grayscale(100%);
+      }
+
+      .tt-testimonial-card.tt-active {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        z-index: 20;
+        filter: grayscale(0%);
+      }
+
+      .tt-testimonial-card .tt-quote-icon {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        font-size: 3rem;
+        color: #6d28d9;
+        line-height: 1;
+      }
+
+      .tt-testimonial-card .tt-reviewer-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        display: block;
+      }
+
+      .tt-testimonial-card .tt-testimonial-content {
+        font-size: 1rem;
+        color: #fff;
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .tt-testimonial-card.tt-active .tt-quote-icon {
+        color: #1d4ed8;
+      }
+
+      .tt-reviewer-info {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .tt-reviewer-info .tt-reviewer-name {
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .tt-rating {
+        color: #fbbf24;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        display: block;
+        text-align: center;
+      }
+
+      .tt-star {
+        display: inline-block;
+        margin: 0 2px;
+      }
+
+      .tt-nav-btn {
+        background-color: #cec8b4;
+        border: none;
+        border-radius: 50%;
+        padding: 1rem;
+        transition: background-color 0.3s, transform 0.2s;
+        cursor: pointer;
+        z-index: 30;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tt-nav-btn:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      .tt-nav-btn-prev {
+        left: 2rem;
+      }
+
+      .tt-nav-btn-next {
+        right: 2rem;
+      }
+
+      .tt-nav-btn svg {
+        color: #6b7280;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .tt-dots-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: 0.75rem;
+      }
+
+      .tt-dot {
+        width: 10px;
+        height: 10px;
+        background-color: #6b7280;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .tt-dot.tt-active {
+        background-color: #ef3939;
+        transform: scale(1.2);
+      }
+
+      @media (max-width: 1024px) {
+        .tt-nav-btn-prev {
+          left: 1rem;
+        }
+        .tt-nav-btn-next {
+          right: 1rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .tt-carousel-wrapper {
+          max-width: 100%;
+        }
+        .tt-carousel {
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          padding: 0;
+        }
+        .tt-testimonial-card {
+          min-width: 80vw;
+          opacity: 1;
+          transform: scale(1);
+          filter: grayscale(0%);
+        }
+        .tt-nav-btn {
+          position: static;
+          transform: none;
+          margin: 0 0.5rem;
+        }
+        .tt-carousel-container {
+          flex-direction: column;
+        }
+      }
+
+      /* cta */
+      /* === Hero Lighting Section === */
+      .hero-lighting {
+        position: relative;
+        width: 100%;
+        min-height: 300px;
+        background-image: url("https://www.lighting.philips.co.in/consumer/_jcr_content/root/responsivegrid/story_banner_compone_589958477.signifyimg.82.2000.png/1748415199533.png"); /* replace with your image */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        padding: 60px 20px;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+
+      .hero-lighting::after {
+        /* optional subtle overlay for better text contrast */
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.25);
+      }
+
+      .hero-content {
+        position: relative;
+        max-width: 800px;
+        color: #fff;
+        z-index: 1;
+      }
+
+      .hero-content h1 {
+        font-size: 55px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      .hero-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: #ef3939de;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .hero-btn:hover {
+        background: #ef3939;
+      }
+      /* news letter */
+      /* === Newsletter Section === */
+      .newsletter-section {
+        padding: 60px 20px;
+        text-align: center;
+        color: #fff;
+        font-family: "Inter", sans-serif;
+      }
+
+      .newsletter-container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .newsletter-container h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+      }
+
+      .newsletter-form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .newsletter-form input[type="email"] {
+        flex: 1 1 300px;
+        min-width: 240px;
+        padding: 12px 16px;
+        border: 2px solid #fff;
+        background: transparent;
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 6px;
+        outline: none;
+      }
+
+      .newsletter-form input::placeholder {
+        color: #e0e0e0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .newsletter-form button {
+        padding: 12px 24px;
+        border: 2px solid #fff;
+        background: transparent;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      /* Responsive Design for Experience Section */
+      @media (max-width: 768px) {
+        .experience-section {
+          padding: 30px 20px;
+        }
+
+        .experience-header h2 {
+          font-size: 2rem;
+        }
+
+        .experience-tab {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+
+        .experience-image-wrapper img {
+          height: 300px;
+        }
+
+        .marker {
+          width: 35px;
+          height: 35px;
+        }
+
+        .marker i {
+          font-size: 14px;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .carousel-overlay h1 {
+          font-size: 3rem;
+        }
+
+        .carousel-overlay p {
+          font-size: 1.1rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .carousel-section {
+          height: 400px;
+        }
+
+        .carousel-overlay h1 {
+          font-size: 2.5rem;
+        }
+
+        .carousel-buttons {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .cards-section {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .card {
+          flex-direction: column;
+          text-align: center;
+          gap: 20px;
+        }
+
+        .card-icon {
+          align-self: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+        }
+
+        .carousel-section {
+          height: 350px;
+        }
+
+        .carousel-overlay h1 {
+          font-size: 2rem;
+        }
+
+        .btn {
+          padding: 12px 25px;
+          font-size: 0.8rem;
+        }
+
+        .card {
+          padding: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Carousel Section -->
+      <div class="carousel-section">
+        <!-- Slide 1 -->
+        <div
+          class="carousel-slide active"
+          style="
+            background-image: url('https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/hero-slider-1.png');
+          "
+        >
+          <div class="carousel-overlay">
+            <h1>Recessed lighting</h1>
+            <p>
+              Discover our selection of recessed & surface mount lighting.
+              Elevate room ambiance and meet precise lighting requirements for
+              homes and businesses.
+            </p>
+            <div class="carousel-buttons">
+              <a href="#" class="btn btn-primary">Shop Now</a>
+              <a href="#" class="btn btn-secondary">Search Catalog</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/landscape-lightning-slide.png');
+          "
+        >
+          <div class="carousel-overlay">
+            <h1>Landscape lighting</h1>
+            <p>
+              Choose from diverse landscape fixtures, transformers, connectors,
+              and bulbs to match your design. We're here to help optimize your
+              outdoor lighting!
+            </p>
+            <div class="carousel-buttons">
+              <a href="#" class="btn btn-primary">Shop Now</a>
+              <a href="#" class="btn btn-secondary">Search Catalog</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/light-bulbs-slide.png');
+          "
+        >
+          <div class="carousel-overlay">
+            <h1>Light Bulbs</h1>
+            <p>
+              Finding the best quality bulbs at the right color temperature is
+              the best way to create ambience and character for your home or
+              business with quality recessed lighting
+            </p>
+            <div class="carousel-buttons">
+              <a href="#" class="btn btn-primary">Shop Now</a>
+              <a href="#" class="btn btn-secondary">Search Catalog</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="carousel-controls">
+          <button class="carousel-nav" id="prevBtn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="carousel-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+          </div>
+          <button class="carousel-nav" id="nextBtn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cards Section -->
+      <div class="cards-section">
+        <!-- Interior Lighting Card -->
+        <div class="card">
+          <div class="card-icon">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_255_580)">
+                <path
+                  d="M13.5 1.5C12.4734 1.49852 11.4772 1.84824 10.6768 2.4911C9.87642 3.13396 9.32002 4.03127 9.1 5.034C8.63097 4.70216 8.07431 4.51638 7.5 4.5C6.70435 4.5 5.94129 4.81608 5.37868 5.37868C4.81607 5.94129 4.5 6.70436 4.5 7.5C4.5 8.29565 4.81607 9.05872 5.37868 9.62133C5.94129 10.1839 6.70435 10.5 7.5 10.5H13.5C14.6935 10.5 15.8381 10.0259 16.682 9.18198C17.5259 8.33807 18 7.19348 18 6C18 4.80653 17.5259 3.66194 16.682 2.81802C15.8381 1.97411 14.6935 1.5 13.5 1.5Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M27.5 1.5H44.5C45.0304 1.5 45.5391 1.71071 45.9142 2.08579C46.2893 2.46086 46.5 2.96957 46.5 3.5V45.5C46.5 45.7652 46.3946 46.0196 46.2071 46.2071C46.0196 46.3946 45.7652 46.5 45.5 46.5H26.5C26.2348 46.5 25.9804 46.3946 25.7929 46.2071C25.6054 46.0196 25.5 45.7652 25.5 45.5V3.5C25.5 2.96957 25.7107 2.46086 26.0858 2.08579C26.4609 1.71071 26.9696 1.5 27.5 1.5Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M31.5 7.5V9"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M40.5 7.5V9"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M31.5 15V16.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M40.5 15V16.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M31.5 22.5V24"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M40.5 22.5V24"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M31.5 30V31.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M40.5 30V31.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M31.5 37.5V39"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M40.5 37.5V39"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M1.5 25.5H19.5V45.5C19.5 45.7652 19.3946 46.0196 19.2071 46.2071C19.0196 46.3946 18.7652 46.5 18.5 46.5H2.5C2.23478 46.5 1.98043 46.3946 1.79289 46.2071C1.60536 46.0196 1.5 45.7652 1.5 45.5V25.5Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M3.5 19.5H17.5C18.0304 19.5 18.5391 19.7107 18.9142 20.0858C19.2893 20.4609 19.5 20.9696 19.5 21.5V25.5H1.5V21.5C1.5 20.9696 1.71071 20.4609 2.08579 20.0858C2.46086 19.7107 2.96957 19.5 3.5 19.5Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M7.5 31.5V33"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M13.5 31.5V33"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M7.5 39V40.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M13.5 39V40.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_255_580">
+                  <rect width="48" height="48" fill="white"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h2>Interior Lighting</h2>
+            <ul>
+              <li>Contractor Lighting Products</li>
+              <li>Recessed Lighting</li>
+              <li>Indoor Commercial Lighting</li>
+              <li>Warehouse Lighting</li>
+              <li>Track Lighting</li>
+              <li>Exit & Emergency Lighting</li>
+            </ul>
+          </div>
+          <span class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+
+        <!-- Exterior Lighting Card -->
+        <div class="card">
+          <div class="card-icon">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_255_717)">
+                <path
+                  d="M1.5 46.5H46.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M15 7.5H6C5.60218 7.5 5.22064 7.34196 4.93934 7.06066C4.65804 6.77936 4.5 6.39782 4.5 6V3C4.5 2.60218 4.65804 2.22064 4.93934 1.93934C5.22064 1.65804 5.60218 1.5 6 1.5H16.5V6C16.5 6.39782 16.342 6.77936 16.0607 7.06066C15.7794 7.34196 15.3978 7.5 15 7.5Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M24 34.5V9"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M24 9C24 7.01088 23.2098 5.10322 21.8033 3.6967C20.3968 2.29018 18.4891 1.5 16.5 1.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M33 7.5H42C42.3978 7.5 42.7794 7.34196 43.0607 7.06066C43.342 6.77936 43.5 6.39782 43.5 6V3C43.5 2.60218 43.342 2.22064 43.0607 1.93934C42.7794 1.65804 42.3978 1.5 42 1.5H31.5V6C31.5 6.39782 31.658 6.77936 31.9393 7.06066C32.2206 7.34196 32.6022 7.5 33 7.5Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M24 9C24 7.01088 24.7902 5.10322 26.1967 3.6967C27.6032 2.29018 29.5109 1.5 31.5 1.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M13.5 13.5V16.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M4.5 13.5L1.5 16.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M34.5 13.5V16.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M43.5 13.5L46.5 16.5"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M31.5 46.5H16.5L19.5 34.5H28.5L31.5 46.5Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M24 46V43"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9.14999 47.65L11.272 49.772"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M36.728 49.772L38.85 47.65"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_255_717">
+                  <rect width="48" height="48" fill="white"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h2>Exterior lighting</h2>
+            <ul>
+              <li>Contractor Lighting Products</li>
+              <li>Flood Lighting</li>
+              <li>Area & Site Lighting</li>
+              <li>Wall Packs</li>
+              <li>Canopy Lighting</li>
+              <li>LED Balloon Lighting</li>
+              <li>Landscape Lighting</li>
+            </ul>
+          </div>
+          <span class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+
+        <!-- Light Bulbs Card -->
+        <div class="card">
+          <div class="card-icon">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  d="M21 45H27"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M36 24C36.008 21.7538 35.3854 19.5504 34.2031 17.6406C33.0207 15.7307 31.3261 14.191 29.3119 13.1967C27.2977 12.2025 25.0449 11.7934 22.8098 12.0162C20.5746 12.2391 18.4469 13.0847 16.6686 14.4571C14.8903 15.8294 13.533 17.6733 12.7509 19.779C11.9688 21.8847 11.7935 24.1676 12.2448 26.368C12.696 28.5684 13.7559 30.598 15.3037 32.2259C16.8515 33.8537 18.8251 35.0144 21 35.576V39H27V35.576C29.5711 34.9171 31.8504 33.4225 33.4795 31.327C35.1087 29.2316 35.9953 26.6542 36 24Z"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M24 6V3"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M42 21H45"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M3 24H6"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M36.728 35.228L38.85 37.35"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9.14999 7.64999L11.272 9.77199"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M36.728 9.77199L38.85 7.64999"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9.14999 37.35L11.272 35.228"
+                  stroke="#B2AD9C"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h2>Light Bulbs</h2>
+            <ul>
+              <li>LED Bulbs</li>
+              <li>Halogen Bulbs</li>
+              <li>Metal Halide Bulbs</li>
+              <li>High-Pressure Sodium Bulbs</li>
+              <li>12 Volt Replacement Bulbs</li>
+              <li>Fluorescent Tubes</li>
+            </ul>
+          </div>
+          <span class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+      </div>
+      <section class="lighting-distribution">
+        <div class="container">
+          <h2 class="section-title">LIGHTING DESIGN AND DISTRIBUTION</h2>
+          <p class="section-subtitle">
+            Since 1957, we are your one-stop shop for landscape lighting,
+            recessed lighting, ballasts, light bulbs, track lighting, commercial
+            lighting, LED lighting, solar lighting, transformers and cabinet
+            lighting
+          </p>
+
+          <div class="features">
+            <div class="feature-item">
+              <i class="fas fa-truck"></i>
+              <h3>FREE SHIPPING</h3>
+              <p>orders Over $500</p>
+            </div>
+            <div class="feature-item feature-item-price">
+              <i class="fas fa-dollar-sign"></i>
+              <h3>EVERYDAY LOWEST PRICE</h3>
+              <p>Regardless of Quality</p>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-lightbulb"></i>
+              <h3>LED SUPERSTORE</h3>
+              <p>We specialize in LED</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Experience Section -->
+      <div class="experience-section">
+        <div class="experience-header">
+          <h2>Experience USA LIGHT</h2>
+          <div class="experience-tabs">
+            <button class="experience-tab active" data-room="living">
+              Living Room
+            </button>
+            <button class="experience-tab" data-room="office">Office</button>
+            <button class="experience-tab" data-room="kitchen">Kitchen</button>
+          </div>
+        </div>
+
+        <div class="experience-container">
+          <div class="experience-image-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              alt="Living Room"
+              id="experienceImage"
+            />
+            <div class="markers-container" id="markersContainer">
+              <!-- Markers will be dynamically added here -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="tt-testimonial-section">
+        <div class="tt-section-header">
+          <h2>Customer Reviews</h2>
+        </div>
+
+        <div class="tt-carousel-container">
+          <button class="tt-nav-btn tt-nav-btn-prev" id="tt-prevBtn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <div class="tt-carousel-wrapper">
+            <div id="tt-carousel" class="tt-carousel">
+              <div class="tt-testimonial-card tt-active">
+                <div class="tt-rating" aria-label="5 out of 5 stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                </div>
+                <p class="tt-testimonial-content">
+                  I rarely put the time aside to do this but they have been a
+                  good supplier and thought it was a chance to express my
+                  thanks. I highly recommend these guys. Good luck to you
+                  USALIGHT.COM!
+                </p>
+
+                <div class="tt-reviewer-info">
+                  <p class="tt-reviewer-name">Herman</p>
+                </div>
+              </div>
+              <div class="tt-testimonial-card">
+                <div class="tt-rating" aria-label="5 out of 5 stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                </div>
+                <p class="tt-testimonial-content">
+                  I ordered; you shipped; I received all in just 3 days. The
+                  lights were just as depicted on the website and all worked
+                  perfectly. I will order again in the future. Thanks!!
+                </p>
+                <div class="tt-reviewer-info">
+                  <p class="tt-reviewer-name">Paul Neuman</p>
+                </div>
+              </div>
+              <div class="tt-testimonial-card">
+                <div class="tt-rating" aria-label="5 out of 5 stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                </div>
+                <p class="tt-testimonial-content">
+                  Excellent product and accurate description by seller. Two
+                  thumbs up! Thanks.
+                </p>
+                <div class="tt-reviewer-info">
+                  <p class="tt-reviewer-name">Muhammad Siddiqui</p>
+                </div>
+              </div>
+              <div class="tt-testimonial-card">
+                <div class="tt-rating" aria-label="5 out of 5 stars">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M12.0061 0L15.717 7.89373L24 9.16897L18.0091 15.3156L19.4159 24L12.0061 19.9065L4.58413 24L6.00303 15.3156L0 9.16897L8.2951 7.89373L12.0061 0Z"
+                      fill="#B2AD9C"
+                    ></path>
+                  </svg>
+                </div>
+                <p class="tt-testimonial-content">
+                  I ordered 12 low voltage landscape lights. Had issue with 2
+                  bulbs. Tech support was extremely helpful and shipped out
+                  replacements right away. Probably the best customer service
+                  experience I've had on the internet
+                </p>
+
+                <div class="tt-reviewer-info">
+                  <p class="tt-reviewer-name">Aharui</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="tt-nav-btn tt-nav-btn-next" id="tt-nextBtn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="tt-dots-container" id="tt-dots-container">
+          <!-- Dots will be dynamically added here -->
+        </div>
+      </section>
+      <section class="hero-lighting">
+        <div class="hero-content">
+          <h1>Looking for lighting inspiration?</h1>
+          <a href="#" class="hero-btn">Know Now</a>
+        </div>
+      </section>
+      <section class="newsletter-section">
+        <div class="newsletter-container">
+          <h2>NEWSLETTER SIGN UP</h2>
+          <form class="newsletter-form" action="#" method="post">
+            <input
+              type="email"
+              name="email"
+              placeholder="EMAIL ADDRESS"
+              required
+            />
+            <button type="submit">SUBMIT</button>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // Experience Section Data
+      const experienceData = {
+        living: {
+          image: "living room.png",
+          markers: [
+            { x: 25, y: 15, icon: "fas fa-plus", product: "Ceiling Light" },
+            { x: 75, y: 40, icon: "fas fa-plus", product: "Floor Lamp" },
+            { x: 45, y: 70, icon: "fas fa-plus", product: "Table Lamp" },
+          ],
+        },
+        office: {
+          image: "office.png",
+          markers: [
+            { x: 50, y: 20, icon: "fas fa-plus", product: "Vanity Light" },
+            { x: 80, y: 60, icon: "fas fa-plus", product: "Shower Light" },
+          ],
+        },
+        kitchen: {
+          image: "Kitchen.png",
+          markers: [
+            { x: 30, y: 25, icon: "fas fa-plus", product: "Pendant Light" },
+            {
+              x: 70,
+              y: 35,
+              icon: "fas fa-plus",
+              product: "Under Cabinet Light",
+            },
+            { x: 50, y: 70, icon: "fas fa-plus", product: "Island Light" },
+          ],
+        },
+      };
+
+      // Experience Section Functionality
+      const experienceImage = document.getElementById("experienceImage");
+      const markersContainer = document.getElementById("markersContainer");
+      const experienceTabs = document.querySelectorAll(".experience-tab");
+      let currentRoom = "living";
+
+      function createMarker(marker) {
+        const markerElement = document.createElement("div");
+        markerElement.className = "marker";
+        markerElement.style.left = marker.x + "%";
+        markerElement.style.top = marker.y + "%";
+        markerElement.innerHTML = `<i class="${marker.icon}"></i>`;
+
+        markerElement.addEventListener("click", () => {
+          console.log("Product clicked:", marker.product);
+          // Add your product click logic here
+        });
+
+        return markerElement;
+      }
+
+      function updateExperience(roomType) {
+        const roomData = experienceData[roomType];
+
+        // Update image with fade effect
+        experienceImage.style.opacity = "0";
+
+        setTimeout(() => {
+          experienceImage.src = roomData.image;
+          experienceImage.alt =
+            roomType.charAt(0).toUpperCase() + roomType.slice(1) + " Room";
+
+          // Clear existing markers
+          markersContainer.innerHTML = "";
+
+          // Add new markers
+          roomData.markers.forEach((marker) => {
+            markersContainer.appendChild(createMarker(marker));
+          });
+
+          experienceImage.style.opacity = "1";
+        }, 200);
+      }
+
+      // Experience tab functionality
+      experienceTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          // Update active tab
+          experienceTabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+
+          // Update room
+          currentRoom = tab.dataset.room;
+          updateExperience(currentRoom);
+        });
+      });
+
+      // Initialize experience section
+      experienceImage.style.transition = "opacity 0.3s ease-in-out";
+      updateExperience(currentRoom);
+
+      // Carousel functionality
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+      const indicators = document.querySelectorAll(".indicator");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach((slide) => slide.classList.remove("active"));
+        indicators.forEach((indicator) => indicator.classList.remove("active"));
+
+        // Show current slide
+        slides[index].classList.add("active");
+        indicators[index].classList.add("active");
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      function prevSlide() {
+        currentSlide =
+          currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        showSlide(currentSlide);
+      }
+
+      // Event listeners
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+
+      // Indicator clicks
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+          currentSlide = index;
+          showSlide(currentSlide);
+        });
+      });
+
+      // Auto-advance carousel
+      setInterval(nextSlide, 5000);
+
+      // Button click animations
+      document.querySelectorAll(".btn").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "scale(1)";
+          }, 150);
+          console.log("Button clicked:", this.textContent);
+        });
+      });
+
+      // Card hover effects
+      const cards = document.querySelectorAll(".card");
+      cards.forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+      //   review section
+      const ttCarousel = document.getElementById("tt-carousel");
+      const ttPrevBtn = document.getElementById("tt-prevBtn");
+      const ttNextBtn = document.getElementById("tt-nextBtn");
+      const ttDotsContainer = document.getElementById("tt-dots-container");
+      const ttCards = ttCarousel.querySelectorAll(".tt-testimonial-card");
+      const ttTotalCards = ttCards.length;
+      let ttActiveIndex = 0;
+
+      const ttRenderDots = () => {
+        const dotsContent = Array.from(
+          { length: ttTotalCards },
+          (_, index) => `<div class="tt-dot" data-index="${index}"></div>`
+        ).join("");
+        ttDotsContainer.innerHTML = dotsContent;
+        ttUpdateDots();
+      };
+
+      const ttUpdateCarousel = () => {
+        const cardWidth = ttCards[0].offsetWidth;
+        const gap = parseInt(window.getComputedStyle(ttCarousel).gap);
+        const totalCardWidth = cardWidth + gap;
+        const carouselWrapperWidth = ttCarousel.parentElement.offsetWidth;
+        const offset = carouselWrapperWidth / 2 - cardWidth / 2;
+
+        ttCarousel.style.transform = `translateX(${
+          -ttActiveIndex * totalCardWidth + offset
+        }px)`;
+
+        ttCards.forEach((card, index) => {
+          if (index === ttActiveIndex) {
+            card.classList.add("tt-active");
+          } else {
+            card.classList.remove("tt-active");
+          }
+        });
+
+        ttUpdateDots();
+      };
+
+      const ttUpdateDots = () => {
+        const dots = ttDotsContainer.querySelectorAll(".tt-dot");
+        dots.forEach((dot, index) => {
+          if (index === ttActiveIndex) {
+            dot.classList.add("tt-active");
+          } else {
+            dot.classList.remove("tt-active");
+          }
+        });
+      };
+
+      const ttHandleNext = () => {
+        ttActiveIndex = (ttActiveIndex + 1) % ttTotalCards;
+        ttUpdateCarousel();
+      };
+
+      const ttHandlePrev = () => {
+        ttActiveIndex = (ttActiveIndex - 1 + ttTotalCards) % ttTotalCards;
+        ttUpdateCarousel();
+      };
+
+      ttNextBtn.addEventListener("click", ttHandleNext);
+      ttPrevBtn.addEventListener("click", ttHandlePrev);
+
+      ttDotsContainer.addEventListener("click", (e) => {
+        if (e.target.classList.contains("tt-dot")) {
+          ttActiveIndex = parseInt(e.target.dataset.index, 10);
+          ttUpdateCarousel();
+        }
+      });
+
+      ttRenderDots();
+      window.addEventListener("resize", () => {
+        clearTimeout(window.resizeTimeout);
+        window.resizeTimeout = setTimeout(ttUpdateCarousel, 250);
+      });
+
+      ttUpdateCarousel();
+    </script>
+  </body>
+</html>
