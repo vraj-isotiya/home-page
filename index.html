@@ -3,100 +3,2716 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lighting Layout</title>
+    <title>USA LIGHT</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #2c3e50;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* navbar */
+
+      ul,
+      ol,
+      li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      a {
+        color: #b2ad9c;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      a:hover,
+      a:focus {
+        text-decoration: none;
+        outline: none;
+      }
+
+      .main-wrapper {
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .container.wide {
+        width: 100%;
+        max-width: 1480px;
+        margin: 0 auto;
+        padding: 0 0px;
+      }
+
+      /* Header Styles */
+      .header-area {
+        margin-bottom: 30px;
+      }
+
+      .header-inn {
+        padding: 20px 40px;
+        background: #e9e6dd;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .site-logo {
+        width: 150px;
+      }
+
+      .site-logo img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Navigation Styles */
+      .header-navigation .mainmenu ul {
+        display: flex;
+        align-items: center;
+      }
+
+      .mainmenu ul li {
+        margin: 0 7px;
+      }
+
+      .mainmenu ul li a {
+        color: #29323d;
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        display: block;
+        padding: 10px 0;
+        background: linear-gradient(
+          to right,
+          #cd3838,
+          #cd3838 50%,
+          #29323d 50%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% 100%;
+        background-position: 100%;
+      }
+
+      .mainmenu ul li:hover a,
+      .mainmenu ul li a:hover {
+        background-position: 0 100%;
+      }
+
+      /* Dropdown indicator */
+      .has-dropdown {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      .has-dropdown a {
+        margin-right: 5px; /* add spacing between text & arrow */
+      }
+
+      .has-dropdown > span {
+        position: static; /* remove absolute positioning */
+        display: flex;
+        align-items: center;
+        font-size: 12px; /* adjust size if needed */
+        transition: all 0.3s;
+      }
+
+      .has-dropdown:hover > span {
+        color: #cd3838;
+      }
+
+      /* Header Actions */
+      .header-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .header_links {
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+      }
+
+      .header_links li {
+        margin-left: 13px;
+      }
+
+      .header_links li:first-child {
+        margin-left: 0;
+      }
+
+      .header_links li svg {
+        height: 20px;
+        width: 20px;
+        transition: all 0.3s;
+      }
+
+      .header_links li a:hover svg path {
+        fill: #ef3939;
+      }
+
+      /* Cart */
+      .v-cart {
+        position: relative;
+      }
+
+      .cart__count {
+        position: absolute;
+        top: -30%;
+        right: -80%;
+        color: black;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      /* Contact Button */
+      .cta-btn.btn_default {
+        display: inline-block;
+        padding: 16px 20px;
+        border-radius: 8px;
+        font-size: 15px;
+        line-height: 100%;
+        background: #cd3838;
+        color: #e9e6dd;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn_default:before {
+        content: "";
+        box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.25);
+        position: absolute;
+        top: -10px;
+        left: -7px;
+        width: calc(100% + 14px);
+        height: calc(100% + 14px);
+        opacity: 0;
+        transition: 0.3s all;
+      }
+
+      .btn_default:hover {
+        background: #ef3939;
+        color: #e9e6dd;
+      }
+
+      .btn_default:hover::before {
+        opacity: 1;
+        top: 0px;
+      }
+
+      /* Mobile Toggle */
+      .header-toggle {
+        display: none;
+        height: 46px;
+        width: 46px;
+        text-align: center;
+        background: #29323d;
+        margin-left: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      #menu-toggle {
+        width: 42px;
+        height: 42px;
+        display: block;
+        position: relative;
+        background: transparent;
+        padding: 4px 8px;
+        border-radius: 7px;
+        margin: 2px auto;
+      }
+
+      .header-toggle span {
+        height: 2px;
+        width: 95%;
+        background: #fff;
+        display: block;
+        margin-top: 5px;
+        position: relative;
+        transition: all 0.2s ease;
+        border-radius: 5px;
+        margin-right: auto;
+        margin-left: 0;
+      }
+
+      .header-toggle span:nth-child(1) {
+        top: 4px;
+      }
+
+      .header-toggle span:nth-child(2) {
+        top: 6px;
+        width: 65%;
+      }
+
+      .header-toggle span:nth-child(3) {
+        top: 8px;
+      }
+
+      .header-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .header-toggle.active span:nth-child(1) {
+        top: 14px;
+        transform: rotate(45deg);
+      }
+
+      .header-toggle.active span:nth-child(3) {
+        top: 0px;
+        transform: rotate(-45deg);
+      }
+
+      .mobile_quote_btn {
+        display: none;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .mainmenu ul li a {
+          font-size: 12px;
+        }
+
+        .mainmenu ul li {
+          margin: 0 5px;
+        }
+
+        .header-inn {
+          padding: 16px 25px;
+        }
+
+        .site-logo {
+          width: 100px;
+        }
+
+        .header_links {
+          margin-right: 15px;
+        }
+
+        .header-area .cta-btn {
+          font-size: 12px;
+          padding: 13px 16px;
+        }
+
+        .header_links li svg {
+          height: 15px;
+        }
+
+        .header_links li {
+          margin-left: 8px;
+        }
+      }
+
+      @media (max-width: 991px) {
+        .header-toggle {
+          display: block;
+        }
+
+        .header-navigation {
+          position: absolute;
+          top: 99%;
+          left: 0;
+          width: 100%;
+          z-index: 999;
+          min-height: calc(100vh - 71px);
+          opacity: 0;
+          visibility: hidden;
+          transition: 0.3s all;
+        }
+
+        .header-navigation.active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .mainmenu {
+          background: #29323d;
+          padding: 50px 20px;
+          border-radius: 0 0 16px 16px;
+        }
+
+        .mainmenu ul {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .mainmenu ul li {
+          display: block;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+        }
+
+        .mainmenu ul li a {
+          display: block;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(178, 173, 156, 0.2);
+          font-size: 16px;
+          color: #cec8b4;
+          background: linear-gradient(
+            to right,
+            #cd3838,
+            #cd3838 50%,
+            #cec8b4 50%
+          );
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-size: 200% 100%;
+          background-position: 100%;
+        }
+
+        .mainmenu ul li:last-child a {
+          border: none;
+        }
+
+        .has-dropdown > span {
+          border-color: #e9e6dd;
+          width: 12px;
+          height: 12px;
+          top: 16px;
+          right: 3px;
+          border-width: 0 1px 1px 0;
+        }
+
+        .mobile_quote_btn {
+          display: block;
+          margin-top: 20px;
+        }
+
+        .mobile_quote_btn a {
+          display: flex;
+          justify-content: center;
+        }
+
+        .header-inn {
+          padding: 12px 10px;
+        }
+
+        .site-logo img {
+          width: 115px;
+        }
+
+        .header_links {
+          margin-right: 10px;
+        }
+
+        .header_links li svg {
+          height: 16px;
+        }
+
+        .cta-btn {
+          padding: 13px;
+          font-size: 14px;
+        }
+
+        .header-area {
+          padding-top: 15px;
+        }
+      }
+
+      @media (max-width: 575px) {
+        .header-area {
+          padding-top: 0px;
+          background: #e9e6dd;
+        }
+
+        .header-inn {
+          padding: 12px 0px;
+        }
+
+        .header_links li svg {
+          height: 16px;
+        }
+
+        .newsletter-form form button {
+          padding: 10px 15px;
+          font-size: 14px;
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Carousel Section */
+      .carousel-section {
+        position: relative;
+        border-radius: 20px;
+        margin-bottom: 40px;
+        overflow: hidden;
+        height: 500px;
+      }
+
+      .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .carousel-slide.active {
+        opacity: 1;
+      }
+
+      .carousel-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+      }
+
+      .carousel-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 2;
+        max-width: 800px;
+        width: 100%;
+        padding: 0 20px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .carousel-overlay p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        line-height: 1.7;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .carousel-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .btn {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+      }
+
+      .btn-primary {
+        background-color: #cd3838;
+        color: #e9e6dd;
+      }
+
+      .btn-primary:hover {
+        background-color: #d32f2f;
+      }
+
+      .btn-secondary {
+        background-color: #e9e6dd;
+        color: #454136;
+        border: 2px solid white;
+      }
+
+      .btn-secondary:hover {
+        background-color: #29323d;
+        border-color: #29323d;
+        color: #cec8b4;
+      }
+
+      .carousel-controls {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        z-index: 3;
+      }
+
+      .carousel-nav {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(44, 62, 80, 0.8);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .carousel-nav:hover {
+        background-color: #ed3939;
+      }
+
+      .carousel-indicators {
+        display: flex;
+        gap: 10px;
+      }
+
+      .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .indicator.active {
+        background-color: white;
+      }
+
+      /* Cards Section */
+      .cards-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .card {
+        background-color: #34495e;
+        border-radius: 15px;
+        padding: 30px;
+        position: relative;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: flex-start;
+        min-height: 420px;
+        height: 100%;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .card:hover::before {
+        left: 100%;
+      }
+
+      .card:hover {
+        background-color: rgba(205, 56, 56, 0.7);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(237, 57, 57, 0.3);
+      }
+
+      .card-icon {
+        flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        transition: all 0.3s ease;
+      }
+
+      .card-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .card:hover .card-icon svg path {
+        stroke: white;
+      }
+
+      .card-content {
+        flex: 1;
+        width: 100%;
+      }
+
+      .card-content h2 {
+        font-size: 1.6rem;
+        color: white;
+        margin-bottom: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .card-content ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .card-content li {
+        color: #bdc3c7;
+        margin-bottom: 8px;
+        transition: color 0.3s ease;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .card:hover .card-content li {
+        color: white;
+      }
+
+      /* Right-side arrow */
+      .card-arrow {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        font-size: 24px;
+        color: #fff;
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+
+      .card:hover .card-arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .cards-section {
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 10px;
+        }
+
+        .cards-section {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          margin-top: 30px;
+        }
+
+        .card {
+          padding: 25px 20px;
+          min-height: 380px;
+          gap: 20px;
+        }
+
+        .card-content h2 {
+          font-size: 1.4rem;
+          margin-bottom: 12px;
+        }
+
+        .card-content li {
+          font-size: 0.85rem;
+          margin-bottom: 6px;
+        }
+
+        .card-icon {
+          width: 50px;
+          height: 50px;
+        }
+
+        .card-arrow {
+          font-size: 20px;
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .card:hover {
+          transform: translateY(-3px);
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        .cards-section {
+          gap: 15px;
+          margin-top: 20px;
+        }
+
+        .card {
+          padding: 20px 16px;
+          min-height: 350px;
+          gap: 18px;
+          border-radius: 12px;
+        }
+
+        .card-content h2 {
+          font-size: 1.3rem;
+          margin-bottom: 10px;
+          letter-spacing: 0.5px;
+        }
+
+        .card-content li {
+          font-size: 0.8rem;
+          margin-bottom: 5px;
+        }
+
+        .card-icon {
+          width: 45px;
+          height: 45px;
+        }
+
+        .card-arrow {
+          font-size: 18px;
+          bottom: 16px;
+          right: 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 15px 0px 0px 0px;
+        }
+
+        .card {
+          padding: 18px 14px;
+          min-height: 320px;
+          gap: 16px;
+        }
+
+        .card-content h2 {
+          font-size: 1.2rem;
+          margin-bottom: 8px;
+        }
+
+        .card-content li {
+          font-size: 0.75rem;
+          margin-bottom: 4px;
+        }
+
+        .card-icon {
+          width: 40px;
+          height: 40px;
+        }
+
+        .card-arrow {
+          font-size: 16px;
+          bottom: 14px;
+          right: 14px;
+        }
+      }
+
+      /* Large Desktop */
+      @media (min-width: 1400px) {
+        .container {
+          max-width: 1400px;
+        }
+
+        .cards-section {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px;
+        }
+
+        .card {
+          padding: 35px;
+          min-height: 450px;
+          gap: 30px;
+        }
+
+        .card-content h2 {
+          font-size: 1.8rem;
+          margin-bottom: 18px;
+        }
+
+        .card-content li {
+          font-size: 1rem;
+          margin-bottom: 10px;
+        }
+
+        .card-icon {
+          width: 70px;
+          height: 70px;
+        }
+
+        .card-arrow {
+          font-size: 28px;
+          bottom: 35px;
+          right: 35px;
+        }
+      }
+
+      /* Tablet Portrait */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .cards-section {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
+        }
+
+        .card {
+          padding: 25px;
+          min-height: 400px;
+        }
+      }
+
+      /* Ultra-wide screens */
+      @media (min-width: 1920px) {
+        .container {
+          max-width: 1600px;
+        }
+
+        .cards-section {
+          gap: 50px;
+        }
+
+        .card {
+          padding: 40px;
+          min-height: 480px;
+        }
+
+        .card-content h2 {
+          font-size: 2rem;
+        }
+
+        .card-content li {
+          font-size: 1.1rem;
+        }
+      }
+
+      .lighting-distribution {
+        color: #b2ad9c;
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .lighting-distribution .section-title {
+        font-size: 35px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+      }
+
+      .lighting-distribution .section-subtitle {
+        max-width: 850px;
+        margin: 0 auto 50px;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+      }
+
+      .feature-item {
+        flex: 1 1 250px; /* grow, shrink, min width */
+        max-width: 300px;
+        padding: 20px;
+      }
+
+      .feature-item i {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: #c8c3b3;
+      }
+
+      .feature-item h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .feature-item p {
+        font-size: 0.95rem;
+        margin: 0;
+        opacity: 0.9;
+      }
+
+      /* Divider only on larger screens */
+      @media (min-width: 992px) {
+        .feature-item {
+          position: relative;
+        }
+        .feature-item:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 15%;
+          height: 70%;
+          width: 1px;
+          background: rgba(200, 195, 179, 0.3);
+        }
+      }
+
+      /* Experience Section */
+      .experience-section {
+        /* background-color: #34495e; */
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .experience-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .experience-header h2 {
+        font-size: 45px;
+        color: white;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .experience-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        /* flex-wrap: wrap; */
+      }
+
+      .experience-tab {
+        padding: 12px 24px;
+        background-color: transparent;
+        border: 2px solid #bdc3c7;
+        border-radius: 25px;
+        color: #bdc3c7;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        font-size: clamp(0.85rem, 2vw, 1rem);
+        white-space: nowrap;
+      }
+
+      .experience-tab:hover {
+        border-color: #ed3939;
+        color: #ed3939;
+      }
+
+      .experience-tab.active {
+        background-color: #ed3939;
+        border-color: #ed3939;
+        color: white;
+      }
+
+      /* Image container */
+      .experience-container {
+        width: 100%;
+      }
+
+      .experience-image-wrapper {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .experience-image-wrapper img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Markers */
+      .markers-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .marker {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        background-color: #ed3939;
+        border: 3px solid white;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 12px rgba(237, 57, 57, 0.4);
+        z-index: 10;
+      }
+
+      .marker:hover {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 6px 16px rgba(237, 57, 57, 0.6);
+      }
+
+      .marker i {
+        color: white;
+        font-size: 14px;
+      }
+
+      .marker::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #ed3939;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.8);
+          opacity: 0;
+        }
+      }
+
+      /* Product Card - Desktop */
+      .product-card {
+        position: absolute;
+        width: 240px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 1000;
+        pointer-events: none;
+      }
+
+      .product-card.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .product-card-content {
+        padding: 15px;
+      }
+
+      .product-card h3 {
+        font-size: 1rem;
+        color: #2c3e50;
+        margin: 0;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      /* Mobile Popup */
+      .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .popup-overlay.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+      }
+
+      .popup-content {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        max-width: 90vw;
+        max-height: 80vh;
+        width: 350px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        transform: translateY(30px);
+        transition: transform 0.3s ease;
+      }
+
+      .popup-overlay.show .popup-content {
+        transform: translateY(0);
+      }
+
+      .popup-header {
+        position: relative;
+        padding: 0;
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        z-index: 10;
+        transition: background 0.3s ease;
+      }
+
+      .popup-close:hover {
+        background: rgba(0, 0, 0, 0.9);
+      }
+
+      .popup-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .popup-body {
+        padding: 20px;
+      }
+
+      .popup-title {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      /* Responsive Breakpoints */
+      @media (max-width: 1024px) {
+        .experience-section {
+          padding: 30px;
+        }
+
+        .marker {
+          width: 26px;
+          height: 26px;
+        }
+
+        .marker i {
+          font-size: 13px;
+        }
+
+        .product-card {
+          width: 220px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .experience-section {
+          padding: 20px;
+          border-radius: 15px;
+        }
+
+        .experience-tabs {
+          gap: 8px;
+        }
+
+        .experience-tab {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+
+        .marker {
+          width: 32px;
+          height: 32px;
+        }
+
+        .marker i {
+          font-size: 16px;
+        }
+
+        /* Hide desktop product cards on mobile */
+        .product-card {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .experience-section {
+          padding: 15px;
+          margin-bottom: 20px;
+        }
+
+        .experience-header {
+          margin-bottom: 20px;
+        }
+
+        .experience-tabs {
+          gap: 6px;
+        }
+
+        .experience-tab {
+          padding: 8px 16px;
+          font-size: 0.85rem;
+        }
+
+        .marker {
+          width: 28px;
+          height: 28px;
+        }
+
+        .marker i {
+          font-size: 14px;
+        }
+
+        .popup-content {
+          width: 95vw;
+          margin: 10px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .experience-tab {
+          padding: 6px 12px;
+          font-size: 0.8rem;
+        }
+
+        .popup-body {
+          padding: 15px;
+        }
+      }
+
+      /* Customer Review Section */
+      .tt-testimonial-section {
+        padding: clamp(2rem, 5vw, 4rem) clamp(0.5rem, 2vw, 1rem);
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        contain: layout; /* Prevent layout shifts */
+      }
+
+      .tt-section-header {
+        margin-bottom: clamp(2rem, 4vw, 3rem);
+      }
+
+      .tt-section-header h2 {
+        font-size: 50px;
+        font-weight: 700;
+        color: #cec8b4;
+        text-transform: uppercase;
+      }
+
+      .tt-carousel-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: clamp(350px, 50vw, 450px);
+        overflow: visible;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      .tt-carousel-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+      }
+
+      .tt-carousel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .tt-testimonial-card {
+        position: absolute;
+        width: clamp(200px, 25vw, 280px);
+        background-color: #34495e;
+        border-radius: 1.5rem;
+        padding: clamp(1rem, 2vw, 1.5rem);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.8);
+        z-index: 1;
+        cursor: pointer;
+        will-change: transform, opacity;
+      }
+
+      /* Side cards positioning - Desktop */
+      .tt-testimonial-card.tt-prev {
+        left: clamp(5%, 15vw, 15%);
+        opacity: 0.4;
+        visibility: visible;
+        transform: translateX(-50%) scale(clamp(0.7, 0.8, 0.8));
+        z-index: 5;
+      }
+
+      .tt-testimonial-card.tt-next {
+        left: clamp(95%, 85vw, 85%);
+        opacity: 0.4;
+        visibility: visible;
+        transform: translateX(-50%) scale(clamp(0.7, 0.8, 0.8));
+        z-index: 5;
+      }
+
+      /* Focused card */
+      .tt-testimonial-card.tt-active {
+        left: 50%;
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+        visibility: visible;
+        z-index: 10;
+        width: clamp(280px, 35vw, 380px);
+        padding: clamp(1.25rem, 2.5vw, 2rem);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+      .tt-rating {
+        display: flex;
+        justify-content: center;
+        gap: clamp(2px, 0.5vw, 3px);
+        margin-bottom: clamp(1rem, 2vw, 1.5rem);
+        flex-wrap: nowrap;
+        overflow: visible;
+      }
+
+      .tt-rating svg {
+        width: clamp(16px, 2.5vw, 20px);
+        height: clamp(16px, 2.5vw, 20px);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .tt-active .tt-rating {
+        gap: clamp(3px, 0.6vw, 4px);
+      }
+
+      .tt-active .tt-rating svg {
+        width: clamp(18px, 3vw, 24px);
+        height: clamp(18px, 3vw, 24px);
+      }
+
+      .tt-testimonial-content {
+        font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+        color: #fff;
+        text-align: center;
+        margin-bottom: clamp(1rem, 2vw, 1.5rem);
+        line-height: 1.6;
+        transition: font-size 0.3s ease;
+      }
+
+      .tt-active .tt-testimonial-content {
+        font-size: clamp(0.85rem, 2vw, 1rem);
+      }
+
+      .tt-reviewer-info {
+        text-align: center;
+      }
+
+      .tt-reviewer-name {
+        font-weight: 600;
+        color: #fff;
+        font-size: clamp(0.9rem, 1.8vw, 1rem);
+        transition: font-size 0.3s ease;
+      }
+
+      .tt-active .tt-reviewer-name {
+        font-size: clamp(1rem, 2vw, 1.1rem);
+      }
+
+      .tt-nav-btn {
+        background-color: #cec8b4;
+        border: none;
+        border-radius: 50%;
+        width: clamp(40px, 6vw, 50px);
+        height: clamp(40px, 6vw, 50px);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        z-index: 30;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .tt-nav-btn:hover:not(:active) {
+        background-color: #b8b3a0;
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .tt-nav-btn:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      .tt-nav-btn-prev {
+        left: clamp(0.5rem, 2vw, 2rem);
+      }
+
+      .tt-nav-btn-next {
+        right: clamp(0.5rem, 2vw, 2rem);
+      }
+
+      .tt-nav-btn i {
+        color: #34495e;
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
+      }
+
+      .tt-dots-container {
+        display: flex;
+        justify-content: center;
+        gap: clamp(0.5rem, 1vw, 0.75rem);
+        flex-wrap: wrap;
+      }
+
+      .tt-dot {
+        width: clamp(8px, 1.2vw, 10px);
+        height: clamp(8px, 1.2vw, 10px);
+        background-color: #6b7280;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+      }
+
+      .tt-dot:hover {
+        background-color: #9ca3af;
+      }
+
+      .tt-dot.tt-active {
+        background-color: #ef3939;
+        transform: scale(1.2);
+      }
+
+      /* Auto-play progress indicator */
+      .tt-progress-bar {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 2px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 1px;
+        overflow: hidden;
+        display: none;
+      }
+
+      .tt-progress-fill {
+        height: 100%;
+        background-color: #ef3939;
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+
+      /* Mobile-specific optimizations */
+      @media (max-width: 768px) {
+        .tt-testimonial-section {
+          padding: clamp(1.5rem, 4vw, 2rem) clamp(0.5rem, 2vw, 1rem);
+        }
+
+        .tt-carousel-container {
+          height: clamp(300px, 45vw, 400px);
+        }
+
+        /* Stack layout for very small screens */
+        .tt-testimonial-card.tt-prev,
+        .tt-testimonial-card.tt-next {
+          opacity: 0.15;
+          transform: translateX(-50%) scale(0.7);
+        }
+
+        .tt-testimonial-card.tt-prev {
+          left: 20%;
+        }
+
+        .tt-testimonial-card.tt-next {
+          left: 80%;
+        }
+
+        /* Larger touch targets */
+        .tt-nav-btn {
+          width: 44px;
+          height: 44px;
+        }
+
+        .tt-dot {
+          width: 12px;
+          height: 12px;
+          min-width: 12px;
+          min-height: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .tt-carousel-container {
+          height: clamp(280px, 40vw, 350px);
+        }
+
+        /* Single card view on very small screens */
+        .tt-testimonial-card.tt-prev,
+        .tt-testimonial-card.tt-next {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+        }
+
+        .tt-testimonial-card.tt-active {
+          width: clamp(260px, 85vw, 300px);
+        }
+
+        .tt-nav-btn-prev {
+          left: 10px;
+          width: 30px;
+          height: 30px;
+        }
+
+        .tt-nav-btn-next {
+          right: 10px;
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .tt-testimonial-card.tt-active {
+          width: 90vw;
+          max-width: 280px;
+        }
+
+        .tt-nav-btn-prev {
+          left: 5px;
+        }
+
+        .tt-nav-btn-next {
+          right: 5px;
+        }
+      }
+
+      /* Large screen optimizations */
+      @media (min-width: 1200px) {
+        .tt-testimonial-card.tt-prev {
+          left: 20%;
+        }
+
+        .tt-testimonial-card.tt-next {
+          left: 80%;
+        }
+
+        .tt-nav-btn-prev {
+          left: 3rem;
+        }
+
+        .tt-nav-btn-next {
+          right: 3rem;
+        }
+      }
+
+      /* Landscape orientation adjustments */
+      @media (max-height: 600px) and (orientation: landscape) {
+        .tt-carousel-container {
+          height: clamp(250px, 35vh, 350px);
+        }
+
+        .tt-testimonial-section {
+          padding: clamp(1rem, 3vw, 2rem) clamp(0.5rem, 2vw, 1rem);
+        }
+      }
+      /* === Enhanced Hero Lighting Section === */
+      .hero-lighting {
+        position: relative;
+        width: 100%;
+        background-image: linear-gradient(
+            135deg,
+            rgba(239, 57, 57, 0.1) 0%,
+            rgba(0, 0, 0, 0.4) 100%
+          ),
+          url("https://www.lighting.philips.co.in/consumer/_jcr_content/root/responsivegrid/story_banner_compone_589958477.signifyimg.82.2000.png/1748415199533.png");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        padding: clamp(40px, 8vw, 80px) clamp(20px, 4vw, 40px);
+        margin: 0 auto 40px;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-lighting::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          transparent 0deg,
+          rgba(239, 57, 57, 0.1) 90deg,
+          transparent 180deg,
+          rgba(239, 57, 57, 0.1) 270deg,
+          transparent 360deg
+        );
+        animation: rotate 20s linear infinite;
+        z-index: 0;
+      }
+
+      .hero-lighting::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 30% 70%,
+          rgba(239, 57, 57, 0.15) 0%,
+          rgba(0, 0, 0, 0.3) 50%,
+          rgba(0, 0, 0, 0.6) 100%
+        );
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        max-width: 800px;
+        color: #fff;
+        z-index: 2;
+        transform: translateY(0);
+        animation: heroSlideUp 1s ease-out;
+      }
+
+      @keyframes heroSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-content h1 {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: clamp(1.5rem, 3vw, 2rem);
+        background: linear-gradient(
+          135deg,
+          #fff 0%,
+          rgba(255, 255, 255, 0.9) 50%,
+          #fff 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+      }
+
+      .hero-content h1::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #ef3939, transparent);
+        border-radius: 2px;
+        animation: lineExpand 1s ease-out 0.5s both;
+      }
+
+      @keyframes lineExpand {
+        from {
+          width: 0;
+          opacity: 0;
+        }
+        to {
+          width: 60px;
+          opacity: 1;
+        }
+      }
+
+      .hero-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px);
+        background: linear-gradient(135deg, #ef3939 0%, #d63031 100%);
+        color: #e9e6dd;
+        font-weight: 600;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(239, 57, 57, 0.3);
+        border: 2px solid transparent;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .hero-btn:hover {
+        box-shadow: 0 20px 40px rgba(239, 57, 57, 0.4);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* === Enhanced Newsletter Section === */
+      .newsletter-section {
+        padding: clamp(60px, 10vw, 100px) clamp(20px, 4vw, 40px);
+        text-align: center;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px;
+        /* background: linear-gradient(
+          135deg,
+          #34495e 0%,
+          #2c3e50 50%,
+          #34495e 100%
+        ); */
+        margin: 0 auto;
+        /* box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          0 20px 40px rgba(0, 0, 0, 0.2); */
+      }
+
+      .newsletter-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* background: radial-gradient(
+            circle at 20% 80%,
+            rgba(239, 57, 57, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(239, 57, 57, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 40%,
+            rgba(255, 255, 255, 0.02) 0%,
+            transparent 50%
+          ); */
+        z-index: 0;
+      }
+
+      .newsletter-section::after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        /* background: linear-gradient(
+          45deg,
+          rgba(239, 57, 57, 0.1) 0%,
+          transparent 25%,
+          transparent 75%,
+          rgba(239, 57, 57, 0.1) 100%
+        ); */
+        border-radius: 32px;
+        z-index: -1;
+        animation: borderGlow 4s ease-in-out infinite alternate;
+      }
+
+      @keyframes borderGlow {
+        from {
+          opacity: 0.3;
+        }
+        to {
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .newsletter-container {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .newsletter-container h2 {
+        font-size: 50px;
+        font-weight: 700;
+        margin-bottom: clamp(12px, 2vw, 20px);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background-clip: text;
+        position: relative;
+        animation: titleSlide 1s ease-out;
+      }
+
+      @keyframes titleSlide {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .newsletter-subtitle {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: clamp(30px, 5vw, 50px);
+        max-width: 500px;
+        font-weight: 400;
+        line-height: 1.7;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: subtitleFade 1s ease-out 0.3s both;
+      }
+
+      @keyframes subtitleFade {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .newsletter-form {
+        display: flex;
+        justify-content: center;
+        gap: clamp(12px, 2vw, 20px);
+        position: relative;
+        animation: formSlide 1s ease-out 0.6s both;
+      }
+
+      @keyframes formSlide {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .input-wrapper {
+        position: relative;
+        flex: auto;
+        min-width: 280px;
+        max-width: 450px;
+      }
+
+      .newsletter-form input[type="email"] {
+        width: 100%;
+        padding: clamp(14px, 2.5vw, 18px) clamp(50px, 8vw, 60px)
+          clamp(14px, 2.5vw, 18px) clamp(18px, 3vw, 24px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        border-radius: 60px;
+        outline: none;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(20px);
+        font-weight: 500;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1),
+          0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .newsletter-form input[type="email"]:focus {
+        border-color: rgba(239, 57, 57, 0.6);
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1),
+          0 4px 30px rgba(239, 57, 57, 0.3), 0 0 0 4px rgba(239, 57, 57, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .newsletter-form input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 500;
+        font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+      }
+
+      .input-icon {
+        position: absolute;
+        right: clamp(18px, 3vw, 24px);
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.4);
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .newsletter-form input:focus + .input-icon {
+        color: rgba(239, 57, 57, 0.8);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .newsletter-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ef3939 0%, #d63031 100%);
+        color: #e9e6dd;
+        gap: 8px;
+        padding: clamp(14px, 2.5vw, 18px) clamp(24px, 4vw, 32px);
+        border: none;
+        border-radius: 60px;
+        font-weight: 600;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        min-width: 140px;
+      }
+
+      .newsletter-btn:active {
+        transform: translateY(-1px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-lighting {
+          background-attachment: scroll;
+          min-height: 350px;
+          border-radius: 20px;
+        }
+
+        .newsletter-section {
+          padding: clamp(40px, 8vw, 60px) clamp(15px, 3vw, 25px);
+          border-radius: 20px;
+        }
+
+        .newsletter-container h2::before {
+          top: -25px;
+          font-size: 1.5rem;
+        }
+
+        .newsletter-form {
+          align-items: center;
+        }
+
+        .input-wrapper {
+          max-width: 100%;
+        }
+
+        .floating-element {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-lighting {
+          min-height: 300px;
+          margin-bottom: 20px;
+          border-radius: 15px;
+        }
+
+        .newsletter-section {
+          border-radius: 15px;
+        }
+
+        .newsletter-container h2::before {
+          top: -20px;
+          font-size: 1.2rem;
+        }
+      }
+      /* Responsive Design for Experience Section */
+      @media (max-width: 768px) {
+        .experience-section {
+          padding: 30px 20px;
+        }
+
+        .experience-header h2 {
+          font-size: 2rem;
+        }
+
+        .experience-tab {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+
+        .marker i {
+          font-size: 14px;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .carousel-overlay h1 {
+          font-size: 3rem;
+        }
+
+        .carousel-overlay p {
+          font-size: 1.1rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .carousel-overlay h1 {
+          font-size: 25px;
+        }
+
+        .carousel-overlay p {
+          font-size: 18px;
+        }
+
+        .carousel-buttons {
+          margin: 0px;
+        }
+        .btn {
+          font-size: 13px;
+        }
+        .carousel-controls {
+          bottom: 10px;
+        }
+        .carousel-nav {
+          height: 30px;
+          width: 30px;
+        }
+        .card {
+          flex-direction: column;
+          text-align: center;
+          gap: 20px;
+        }
+
+        .card-icon {
+          align-self: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+        }
+
+        .carousel-overlay h1 {
+          font-size: 2rem;
+        }
+
+        .btn {
+          padding: 12px 25px;
+          font-size: 0.8rem;
+        }
+
+        .card {
+          padding: 25px;
+        }
+      }
+
+      /* Footer Styles */
+      .footer-area {
+        background: #29323d;
+        padding: 50px 0 20px;
+        margin-top: 30px;
+      }
+
+      .footer-container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .footer-logo-section {
+        margin-right: 30px;
+      }
+
+      .footer-logo {
+        width: 300px;
+        margin-bottom: 20px;
+      }
+
+      .footer-logo img {
+        width: 100%;
+        height: auto;
+      }
+
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-title {
+        color: #b2ad9c;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 8px;
+      }
+
+      .footer-links a {
+        color: #8a8a8a;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 400;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #b2ad9c;
+      }
+
+      .footer-phone {
+        color: #8a8a8a;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      /* Footer Bottom */
+      .footer-bottom {
+        border-top: 1px solid #3d4854;
+        padding-top: 20px;
+        text-align: center;
+      }
+
+      .footer-copyright {
+        color: #8a8a8a;
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .footer-content {
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+          gap: 25px;
+        }
+
+        .footer-logo {
+          width: 280px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .footer-content {
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          gap: 30px;
+        }
+
+        .footer-logo {
+          width: 260px;
+        }
+
+        .footer-title {
+          font-size: 15px;
+        }
+
+        .footer-links a {
+          font-size: 13px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .footer-content {
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 25px;
+        }
+
+        .footer-logo-section {
+          grid-column: span 3;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        .footer-logo {
+          width: 240px;
+          margin: 0 auto 15px;
+        }
+
+        .footer-area {
+          padding: 40px 0 20px;
+        }
+
+        .footer-container {
+          padding: 0 15px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .footer-content {
+          grid-template-columns: 1fr 1fr;
+          gap: 30px;
+        }
+
+        .footer-logo-section {
+          grid-column: span 2;
+          text-align: center;
+          margin-bottom: 25px;
+        }
+
+        .footer-column {
+          text-align: left;
+        }
+
+        .footer-logo {
+          width: 220px;
+        }
+
+        .footer-title {
+          font-size: 14px;
+          margin-bottom: 15px;
+        }
+
+        .footer-links a,
+        .footer-phone {
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 25px;
+          text-align: center;
+        }
+
+        .footer-logo-section {
+          grid-column: span 1;
+          margin-bottom: 30px;
+        }
+
+        .footer-area {
+          padding: 30px 0 15px;
+        }
+
+        .footer-logo {
+          width: 200px;
+        }
+
+        .footer-column {
+          text-align: center;
+        }
+
+        .footer-title {
+          font-size: 16px;
+          margin-bottom: 18px;
+        }
+
+        .footer-links a,
+        .footer-phone {
+          font-size: 14px;
+          line-height: 1.6;
+        }
+
+        .footer-links li {
+          margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+          padding-top: 25px;
+          margin-top: 25px;
+        }
+
+        .footer-copyright {
+          font-size: 11px;
+          line-height: 1.4;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+        .newsletter-container h2 {
+          font-size: 40px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .footer-container {
+          padding: 0 10px;
+        }
+
+        .footer-logo {
+          width: 180px;
+        }
+
+        .footer-area {
+          padding: 25px 0 15px;
+        }
+
+        .footer-content {
+          gap: 20px;
+        }
+
+        .footer-title {
+          font-size: 15px;
+          margin-bottom: 15px;
+        }
+
+        .footer-links a,
+        .footer-phone {
+          font-size: 13px;
+        }
+      }
+      @media (max-width: 390px) {
+        .carousel-buttons {
+          flex-direction: column;
+          margin-bottom: 10px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="container">
+      <!-- navbar -->
+      <header class="header-area">
+        <div class="container wide">
+          <div class="header-inn">
+            <!-- Logo -->
+            <div class="site-logo">
+              <a href="#">
+                <img
+                  src="https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/logo.svg"
+                  alt="USA Light Logo"
+                />
+              </a>
+            </div>
+
+            <!-- Navigation -->
+            <div class="header-navigation">
+              <div class="mainmenu">
+                <nav id="menu">
+                  <ul>
+                    <li class="has-dropdown">
+                      <a href="#">Interior Lighting </a>
+                      <span><i class="fa-solid fa-angle-down"></i></span>
+                    </li>
+                    <li class="has-dropdown">
+                      <a href="#">Exterior Lighting </a>
+                      <span><i class="fa-solid fa-angle-down"></i></span>
+                    </li>
+                    <li class="has-dropdown">
+                      <a href="#">Light Bulbs </a>
+                      <span><i class="fa-solid fa-angle-down"></i></span>
+                    </li>
+                    <li>
+                      <a href="#">Clearance</a>
+                    </li>
+                    <li>
+                      <a href="#">About Us</a>
+                    </li>
+                    <li>
+                      <a href="#">Get Help</a>
+                    </li>
+                  </ul>
+                  <div class="mobile_quote_btn">
+                    <a href="#" class="cta-btn btn_default">Contact Us</a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+              <ul class="header_links">
+                <li>
+                  <a href="#">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M22.67 17L20.22 14.55C19.9593 14.2839 19.6481 14.0725 19.3047 13.9282C18.9613 13.7839 18.5925 13.7096 18.22 13.7096C17.8475 13.7096 17.4787 13.7839 17.1353 13.9282C16.7919 14.0725 16.4807 14.2839 16.22 14.55L15.73 15.04C13.2621 12.9805 10.9831 10.7048 8.92 8.23999L9.42 7.73999C9.95004 7.20935 10.2478 6.49001 10.2478 5.73999C10.2478 4.98997 9.95004 4.27063 9.42 3.73999L7 1.31999C6.46433 0.799516 5.74687 0.508362 5 0.508362C4.25312 0.508362 3.53566 0.799516 3 1.31999L1.66 2.65999C1.01776 3.31076 0.617854 4.1619 0.526876 5.07168C0.435899 5.98145 0.659344 6.89493 1.16 7.65999C5.15622 13.6762 10.3138 18.8338 16.33 22.83C17.0951 23.3306 18.0085 23.5541 18.9183 23.4631C19.8281 23.3721 20.6792 22.9722 21.33 22.33L22.67 21C22.9361 20.7393 23.1475 20.4281 23.2918 20.0847C23.4361 19.7413 23.5104 19.3725 23.5104 19C23.5104 18.6275 23.4361 18.2587 23.2918 17.9153C23.1475 17.5719 22.9361 17.2607 22.67 17Z"
+                        fill="#29323D"
+                      />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M10.25 12.06C10.25 11.397 10.5134 10.7611 10.9822 10.2922C11.4511 9.82339 12.087 9.56 12.75 9.56H20C20.0663 9.56 20.1299 9.53366 20.1768 9.48677C20.2237 9.43989 20.25 9.3763 20.25 9.31V3.06C20.25 2.66217 20.092 2.28064 19.8107 1.99934C19.5294 1.71803 19.1478 1.56 18.75 1.56H1.75C1.35218 1.56 0.970644 1.71803 0.68934 1.99934C0.408035 2.28064 0.25 2.66217 0.25 3.06V13.06C0.25 13.4578 0.408035 13.8394 0.68934 14.1207C0.970644 14.402 1.35218 14.56 1.75 14.56H3.25V18.06C3.25 18.1926 3.30268 18.3198 3.39645 18.4136C3.49021 18.5073 3.61739 18.56 3.75 18.56C3.81558 18.5608 3.88059 18.5479 3.94087 18.522C4.00115 18.4962 4.05535 18.458 4.1 18.41L8 14.56H10C10.0663 14.56 10.1299 14.5337 10.1768 14.4868C10.2237 14.4399 10.25 14.3763 10.25 14.31V12.06Z"
+                        fill="#29323D"
+                      />
+                      <path
+                        d="M22.75 11.06H12.75C12.4848 11.06 12.2304 11.1654 12.0429 11.3529C11.8554 11.5404 11.75 11.7948 11.75 12.06V18.06C11.75 18.3252 11.8554 18.5796 12.0429 18.7671C12.2304 18.9546 12.4848 19.06 12.75 19.06H17.25L20.92 22.32C20.9925 22.3837 21.0819 22.4251 21.1774 22.4391C21.2729 22.4531 21.3704 22.4392 21.4582 22.399C21.5459 22.3588 21.6202 22.2941 21.672 22.2127C21.7237 22.1312 21.7508 22.0365 21.75 21.94V19.06H22.75C23.0152 19.06 23.2696 18.9546 23.4571 18.7671C23.6446 18.5796 23.75 18.3252 23.75 18.06V12.06C23.75 11.7948 23.6446 11.5404 23.4571 11.3529C23.2696 11.1654 23.0152 11.06 22.75 11.06Z"
+                        fill="#29323D"
+                      />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.5 6.25C6.5 7.70869 7.07946 9.10764 8.11091 10.1391C9.14236 11.1705 10.5413 11.75 12 11.75C13.4587 11.75 14.8576 11.1705 15.8891 10.1391C16.9205 9.10764 17.5 7.70869 17.5 6.25C17.5 4.79131 16.9205 3.39236 15.8891 2.36091C14.8576 1.32946 13.4587 0.75 12 0.75C10.5413 0.75 9.14236 1.32946 8.11091 2.36091C7.07946 3.39236 6.5 4.79131 6.5 6.25Z"
+                        fill="#29323D"
+                      />
+                      <path
+                        d="M12 13.25C9.48126 13.2526 7.06643 14.2544 5.28541 16.0354C3.50439 17.8164 2.50265 20.2313 2.5 22.75C2.5 22.8826 2.55268 23.0098 2.64645 23.1036C2.74021 23.1973 2.86739 23.25 3 23.25H21C21.1326 23.25 21.2598 23.1973 21.3536 23.1036C21.4473 23.0098 21.5 22.8826 21.5 22.75C21.4974 20.2313 20.4956 17.8164 18.7146 16.0354C16.9336 14.2544 14.5187 13.2526 12 13.25Z"
+                        fill="#29323D"
+                      />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="search-toggle">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M23.41 20.59L18.77 16C20.0385 14.0993 20.6355 11.8293 20.4662 9.55045C20.2969 7.27163 19.3709 5.11474 17.8354 3.42242C16.2999 1.7301 14.2429 0.599409 11.9913 0.209966C9.73959 -0.179477 7.42235 0.194663 5.40765 1.27295C3.39296 2.35124 1.79635 4.07183 0.871476 6.1614C-0.053403 8.25097 -0.253513 10.5897 0.302934 12.806C0.859382 15.0223 2.14047 16.9891 3.9427 18.394C5.74492 19.7989 7.96492 20.5613 10.25 20.56C12.278 20.5621 14.26 19.956 15.94 18.82L20.59 23.47C20.9648 23.8425 21.4717 24.0516 22 24.0516C22.5284 24.0516 23.0353 23.8425 23.41 23.47C23.6036 23.2834 23.7576 23.0598 23.8627 22.8123C23.9679 22.5649 24.0221 22.2989 24.0221 22.03C24.0221 21.7612 23.9679 21.4951 23.8627 21.2477C23.7576 21.0003 23.6036 20.7766 23.41 20.59ZM10.25 3.00001C11.6835 3.00001 13.0848 3.42497 14.2769 4.22116C15.4689 5.01736 16.3982 6.14907 16.9472 7.47325C17.4962 8.79743 17.6404 10.2547 17.3614 11.6607C17.0825 13.0668 16.393 14.3587 15.3801 15.373C14.3671 16.3873 13.0763 17.0786 11.6705 17.3595C10.2648 17.6404 8.80743 17.4982 7.48249 16.951C6.15755 16.4038 5.02457 15.4761 4.22673 14.2852C3.42889 13.0942 3.002 11.6935 3.00002 10.26C3.00002 8.33627 3.76354 6.49117 5.12289 5.12995C6.48224 3.76872 8.32629 3.00266 10.25 3.00001Z"
+                        fill="#29323D"
+                      />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="v-cart">
+                    <svg
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 22 18"
+                      style="enable-background: new 0 0 22 18"
+                      xml:space="preserve"
+                    >
+                      <path
+                        d="M21,3.5h-7.7H5.7l-1-2.2h8.6H22L21,3.5z M19,10.9c0.7,0,1.2,0.5,1.2,1.2s-0.6,1.2-1.2,1.2H5.6L0,0h2.6l4.7,10.9H19z M8,14.1c1.1,0,2,0.9,2,1.9c0,1.1-0.9,1.9-2,1.9s-2-0.9-2-1.9C6,15,6.9,14.1,8,14.1z M17.7,14.1c1.1,0,2,0.9,2,1.9c0,1.1-0.9,1.9-2,1.9c-1.1,0-2-0.9-2-1.9C15.7,15,16.6,14.1,17.7,14.1z M19.5,7.6l-0.9,2.2h-5.3H8.1L7.3,7.6h6.1H19.5z M6,4.4h7.3h7.3l-0.9,2.2h-6.4H6.9L6,4.4z"
+                        fill="#29323D"
+                      />
+                    </svg>
+                    <span class="cart__count">0</span>
+                  </a>
+                </li>
+              </ul>
+              <div class="d-none d-lg-block">
+                <a href="#" class="cta-btn btn_default">Contact Us</a>
+              </div>
+
+              <div class="header-toggle">
+                <div class="menu-toggle-inn">
+                  <div id="menu-toggle">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Carousel Section -->
       <div class="carousel-section">
-        <div class="carousel-container">
-          <!-- Slide 1 -->
-          <div class="carousel-slide active">
-            <div class="carousel-content">
-              <h1>Recessed lighting</h1>
-              <p>
-                Discover our selection of recessed & surface mount lighting.
-                Elevate room ambiance and meet precise lighting requirements for
-                homes and businesses.
-              </p>
-              <div class="carousel-buttons">
-                <a href="#" class="btn btn-primary">Shop Now</a>
-                <a href="#" class="btn btn-secondary">Search Catalog</a>
-              </div>
-            </div>
-            <div class="carousel-image">
-              <img
-                src="https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/hero-slider-1.png"
-                alt="Modern outdoor lighting setup"
-              />
+        <!-- Slide 1 -->
+        <div
+          class="carousel-slide active"
+          style="
+            background-image: url('https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/hero-slider-1.png');
+          "
+        >
+          <div class="carousel-overlay">
+            <h1>Recessed lighting</h1>
+            <p>
+              Discover our selection of recessed & surface mount lighting.
+              Elevate room ambiance and meet precise lighting requirements for
+              homes and businesses.
+            </p>
+            <div class="carousel-buttons">
+              <a href="#" class="btn btn-primary">Shop Now</a>
+              <a href="#" class="btn btn-secondary">Search Catalog</a>
             </div>
           </div>
+        </div>
 
-          <!-- Slide 2 -->
-          <div class="carousel-slide">
-            <div class="carousel-content">
-              <h1>Landscape lighting</h1>
-              <p>
-                Choose from diverse landscape fixtures, transformers,
-                connectors, and bulbs to match your design. We're here to help
-                optimize your outdoor lighting!
-              </p>
-              <div class="carousel-buttons">
-                <a href="#" class="btn btn-primary">Shop Now</a>
-                <a href="#" class="btn btn-secondary">Search Catalog</a>
-              </div>
-            </div>
-            <div class="carousel-image">
-              <img
-                src="https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/landscape-lightning-slide.png"
-                alt="Garden ambience lighting"
-              />
+        <!-- Slide 2 -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/landscape-lightning-slide.png');
+          "
+        >
+          <div class="carousel-overlay">
+            <h1>Landscape lighting</h1>
+            <p>
+              Choose from diverse landscape fixtures, transformers, connectors,
+              and bulbs to match your design. We're here to help optimize your
+              outdoor lighting!
+            </p>
+            <div class="carousel-buttons">
+              <a href="#" class="btn btn-primary">Shop Now</a>
+              <a href="#" class="btn btn-secondary">Search Catalog</a>
             </div>
           </div>
+        </div>
 
-          <!-- Slide 3 -->
-          <div class="carousel-slide">
-            <div class="carousel-content">
-              <h1>Light Bulbs</h1>
-              <p>
-                Finding the best quality bulbs at the right color temperature is
-                the best way to create ambience and character for your home or
-                business with quality recessed lighting
-              </p>
-              <div class="carousel-buttons">
-                <a href="#" class="btn btn-primary">Shop Now</a>
-                <a href="#" class="btn btn-secondary">Search Catalog</a>
-              </div>
-            </div>
-            <div class="carousel-image">
-              <img
-                src="https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/light-bulbs-slide.png"
-                alt="Pathway lighting"
-              />
+        <!-- Slide 3 -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/light-bulbs-slide.png');
+          "
+        >
+          <div class="carousel-overlay">
+            <h1>Light Bulbs</h1>
+            <p>
+              Finding the best quality bulbs at the right color temperature is
+              the best way to create ambience and character for your home or
+              business with quality recessed lighting
+            </p>
+            <div class="carousel-buttons">
+              <a href="#" class="btn btn-primary">Shop Now</a>
+              <a href="#" class="btn btn-secondary">Search Catalog</a>
             </div>
           </div>
+        </div>
 
-          <!-- Controls -->
-          <div class="carousel-controls">
-            <button class="carousel-nav" id="prevBtn">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="carousel-indicators">
-              <span class="indicator active"></span>
-              <span class="indicator"></span>
-              <span class="indicator"></span>
-            </div>
-            <button class="carousel-nav" id="nextBtn">
-              <i class="fas fa-chevron-right"></i>
-            </button>
+        <!-- Controls -->
+        <div class="carousel-controls">
+          <button class="carousel-nav" id="prevBtn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="carousel-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
           </div>
+          <button class="carousel-nav" id="nextBtn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
 
@@ -112,9 +2728,8 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="Icons" clip-path="url(#clip0_255_580)">
+              <g clip-path="url(#clip0_255_580)">
                 <path
-                  id="Vector"
                   d="M13.5 1.5C12.4734 1.49852 11.4772 1.84824 10.6768 2.4911C9.87642 3.13396 9.32002 4.03127 9.1 5.034C8.63097 4.70216 8.07431 4.51638 7.5 4.5C6.70435 4.5 5.94129 4.81608 5.37868 5.37868C4.81607 5.94129 4.5 6.70436 4.5 7.5C4.5 8.29565 4.81607 9.05872 5.37868 9.62133C5.94129 10.1839 6.70435 10.5 7.5 10.5H13.5C14.6935 10.5 15.8381 10.0259 16.682 9.18198C17.5259 8.33807 18 7.19348 18 6C18 4.80653 17.5259 3.66194 16.682 2.81802C15.8381 1.97411 14.6935 1.5 13.5 1.5Z"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -122,7 +2737,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_2"
                   d="M27.5 1.5H44.5C45.0304 1.5 45.5391 1.71071 45.9142 2.08579C46.2893 2.46086 46.5 2.96957 46.5 3.5V45.5C46.5 45.7652 46.3946 46.0196 46.2071 46.2071C46.0196 46.3946 45.7652 46.5 45.5 46.5H26.5C26.2348 46.5 25.9804 46.3946 25.7929 46.2071C25.6054 46.0196 25.5 45.7652 25.5 45.5V3.5C25.5 2.96957 25.7107 2.46086 26.0858 2.08579C26.4609 1.71071 26.9696 1.5 27.5 1.5Z"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -130,7 +2744,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_3"
                   d="M31.5 7.5V9"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -138,7 +2751,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_4"
                   d="M40.5 7.5V9"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -146,7 +2758,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_5"
                   d="M31.5 15V16.5"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -154,7 +2765,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_6"
                   d="M40.5 15V16.5"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -162,7 +2772,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_7"
                   d="M31.5 22.5V24"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -170,7 +2779,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_8"
                   d="M40.5 22.5V24"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -178,7 +2786,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_9"
                   d="M31.5 30V31.5"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -186,7 +2793,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_10"
                   d="M40.5 30V31.5"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -194,7 +2800,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_11"
                   d="M31.5 37.5V39"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -202,7 +2807,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_12"
                   d="M40.5 37.5V39"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -210,7 +2814,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_13"
                   d="M1.5 25.5H19.5V45.5C19.5 45.7652 19.3946 46.0196 19.2071 46.2071C19.0196 46.3946 18.7652 46.5 18.5 46.5H2.5C2.23478 46.5 1.98043 46.3946 1.79289 46.2071C1.60536 46.0196 1.5 45.7652 1.5 45.5V25.5Z"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -218,7 +2821,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_14"
                   d="M3.5 19.5H17.5C18.0304 19.5 18.5391 19.7107 18.9142 20.0858C19.2893 20.4609 19.5 20.9696 19.5 21.5V25.5H1.5V21.5C1.5 20.9696 1.71071 20.4609 2.08579 20.0858C2.46086 19.7107 2.96957 19.5 3.5 19.5Z"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -226,7 +2828,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_15"
                   d="M7.5 31.5V33"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -234,7 +2835,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_16"
                   d="M13.5 31.5V33"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -242,7 +2842,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_17"
                   d="M7.5 39V40.5"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -250,7 +2849,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_18"
                   d="M13.5 39V40.5"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -265,15 +2863,20 @@
               </defs>
             </svg>
           </div>
-          <h2>Interior Lighting</h2>
-          <ul>
-            <li>Contractor Lighting Products</li>
-            <li>Recessed Lighting</li>
-            <li>Indoor Commercial Lighting</li>
-            <li>Warehouse Lighting</li>
-            <li>Track Lighting</li>
-            <li>Exit & Emergency Lighting</li>
-          </ul>
+          <div class="card-content">
+            <h2>Interior Lighting</h2>
+            <ul>
+              <li>Contractor Lighting Products</li>
+              <li>Recessed Lighting</li>
+              <li>Indoor Commercial Lighting</li>
+              <li>Warehouse Lighting</li>
+              <li>Track Lighting</li>
+              <li>Exit & Emergency Lighting</li>
+            </ul>
+          </div>
+          <span class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </span>
         </div>
 
         <!-- Exterior Lighting Card -->
@@ -393,16 +2996,21 @@
               </defs>
             </svg>
           </div>
-          <h2>Exterior lighting</h2>
-          <ul>
-            <li>Contractor Lighting Products</li>
-            <li>Flood Lighting</li>
-            <li>Area & Site Lighting</li>
-            <li>Wall Packs</li>
-            <li>Canopy Lighting</li>
-            <li>LED Balloon Lighting</li>
-            <li>Landscape Lighting</li>
-          </ul>
+          <div class="card-content">
+            <h2>Exterior lighting</h2>
+            <ul>
+              <li>Contractor Lighting Products</li>
+              <li>Flood Lighting</li>
+              <li>Area & Site Lighting</li>
+              <li>Wall Packs</li>
+              <li>Canopy Lighting</li>
+              <li>LED Balloon Lighting</li>
+              <li>Landscape Lighting</li>
+            </ul>
+          </div>
+          <span class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </span>
         </div>
 
         <!-- Light Bulbs Card -->
@@ -415,9 +3023,8 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="Icons">
+              <g>
                 <path
-                  id="Vector"
                   d="M21 45H27"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -425,7 +3032,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_2"
                   d="M36 24C36.008 21.7538 35.3854 19.5504 34.2031 17.6406C33.0207 15.7307 31.3261 14.191 29.3119 13.1967C27.2977 12.2025 25.0449 11.7934 22.8098 12.0162C20.5746 12.2391 18.4469 13.0847 16.6686 14.4571C14.8903 15.8294 13.533 17.6733 12.7509 19.779C11.9688 21.8847 11.7935 24.1676 12.2448 26.368C12.696 28.5684 13.7559 30.598 15.3037 32.2259C16.8515 33.8537 18.8251 35.0144 21 35.576V39H27V35.576C29.5711 34.9171 31.8504 33.4225 33.4795 31.327C35.1087 29.2316 35.9953 26.6542 36 24Z"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -433,7 +3039,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_3"
                   d="M24 6V3"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -441,7 +3046,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_4"
                   d="M42 21H45"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -449,7 +3053,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_5"
                   d="M3 24H6"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -457,7 +3060,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_6"
                   d="M36.728 35.228L38.85 37.35"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -465,7 +3067,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_7"
                   d="M9.14999 7.64999L11.272 9.77199"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -473,7 +3074,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_8"
                   d="M36.728 9.77199L38.85 7.64999"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -481,7 +3081,6 @@
                   stroke-linejoin="round"
                 ></path>
                 <path
-                  id="Vector_9"
                   d="M9.14999 37.35L11.272 35.228"
                   stroke="#B2AD9C"
                   stroke-width="3"
@@ -491,19 +3090,1042 @@
               </g>
             </svg>
           </div>
-          <h2>Light Bulbs</h2>
-          <ul>
-            <li>LED Bulbs</li>
-            <li>Halogen Bulbs</li>
-            <li>Metal Halide Bulbs</li>
-            <li>High-Pressure Sodium Bulbs</li>
-            <li>12 Volt Replacement Bulbs</li>
-            <li>Fluorescent Tubes</li>
-          </ul>
+          <div class="card-content">
+            <h2>Light Bulbs</h2>
+            <ul>
+              <li>LED Bulbs</li>
+              <li>Halogen Bulbs</li>
+              <li>Metal Halide Bulbs</li>
+              <li>High-Pressure Sodium Bulbs</li>
+              <li>12 Volt Replacement Bulbs</li>
+              <li>Fluorescent Tubes</li>
+            </ul>
+          </div>
+          <span class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </span>
         </div>
       </div>
-    </div>
+      <section class="lighting-distribution">
+        <div class="container">
+          <h2 class="section-title">LIGHTING DESIGN AND DISTRIBUTION</h2>
+          <p class="section-subtitle">
+            Since 1957, we are your one-stop shop for landscape lighting,
+            recessed lighting, ballasts, light bulbs, track lighting, commercial
+            lighting, LED lighting, solar lighting, transformers and cabinet
+            lighting
+          </p>
 
-    <script src="script.js"></script>
+          <div class="features">
+            <div class="feature-item">
+              <i class="fas fa-truck"></i>
+              <h3>FREE SHIPPING</h3>
+              <p>Orders Over $500</p>
+            </div>
+            <div class="feature-item feature-item-price">
+              <i class="fas fa-dollar-sign"></i>
+              <h3>EVERYDAY LOWEST PRICE</h3>
+              <p>Regardless of Quality</p>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-lightbulb"></i>
+              <h3>LED SUPERSTORE</h3>
+              <p>We specialize in LED</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <div class="experience-section">
+        <div class="experience-header">
+          <h2>Experience Our USA LIGHT</h2>
+          <div class="experience-tabs">
+            <button class="experience-tab active" data-room="living">
+              Living Room
+            </button>
+            <button class="experience-tab" data-room="office">Office</button>
+            <button class="experience-tab" data-room="kitchen">Kitchen</button>
+          </div>
+        </div>
+
+        <div class="experience-container">
+          <div class="experience-image-wrapper">
+            <img src="living room.png" alt="Living Room" id="experienceImage" />
+            <div class="markers-container" id="markersContainer">
+              <!-- Markers injected by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Popup -->
+      <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+          <div class="popup-header">
+            <button class="popup-close" id="popupClose">
+              <i class="fas fa-times"></i>
+            </button>
+            <img class="popup-image" id="popupImage" src="" alt="" />
+          </div>
+          <div class="popup-body">
+            <h3 class="popup-title" id="popupTitle"></h3>
+          </div>
+        </div>
+      </div>
+      <section class="tt-testimonial-section">
+        <div class="tt-section-header">
+          <h2>Customer Reviews</h2>
+        </div>
+
+        <div class="tt-carousel-container">
+          <button
+            class="tt-nav-btn tt-nav-btn-prev"
+            id="tt-prevBtn"
+            aria-label="Previous testimonial"
+          >
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <div class="tt-carousel-wrapper">
+            <div
+              id="tt-carousel"
+              class="tt-carousel"
+              role="region"
+              aria-label="Customer testimonials"
+            >
+              <!-- Cards will be dynamically positioned here -->
+            </div>
+            <div class="tt-progress-bar">
+              <div class="tt-progress-fill" id="tt-progressFill"></div>
+            </div>
+          </div>
+
+          <button
+            class="tt-nav-btn tt-nav-btn-next"
+            id="tt-nextBtn"
+            aria-label="Next testimonial"
+          >
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div
+          class="tt-dots-container"
+          id="tt-dots-container"
+          role="tablist"
+          aria-label="Testimonial navigation"
+        >
+          <!-- Dots will be dynamically added here -->
+        </div>
+      </section>
+      <!-- Enhanced Hero Section -->
+      <section class="hero-lighting">
+        <div class="hero-content">
+          <h1>Looking for lighting inspiration?</h1>
+          <a href="#" class="hero-btn">
+            <span>Know Now →</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Enhanced Newsletter Section -->
+      <section class="newsletter-section">
+        <div class="newsletter-container">
+          <h2>Newsletter Sign Up</h2>
+          <p class="newsletter-subtitle">
+            Stay updated with our latest products, exclusive offers, and
+            lighting tips delivered straight to your inbox.
+          </p>
+
+          <form
+            class="newsletter-form"
+            id="newsletterForm"
+            action="#"
+            method="post"
+          >
+            <div class="input-wrapper">
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email address"
+                required
+                id="emailInput"
+              />
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+            <button
+              type="submit"
+              id="submitBtn"
+              class="newsletter-btn newsletter-btn"
+            >
+              <span class="btn-text">Subscribe</span>
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
+    <footer class="footer-area">
+      <div class="footer-container">
+        <div class="footer-content">
+          <!-- Logo Section -->
+          <div class="footer-logo-section">
+            <div class="footer-logo">
+              <img
+                src="https://www.usalight.com/v/vspfiles/templates/qeretail/images/template/newhome/img/footer-logo.svg"
+                alt="USA Light Logo"
+              />
+            </div>
+          </div>
+
+          <!-- Get Help Column -->
+          <div class="footer-column">
+            <h4 class="footer-title">Get Help</h4>
+            <ul class="footer-links">
+              <li><a href="#">Shipping & Returns</a></li>
+              <li><a href="#">Live Chat</a></li>
+              <li><a href="#">Email Us</a></li>
+              <li><div class="footer-phone">Phone: 1-877-235-0020</div></li>
+            </ul>
+          </div>
+
+          <!-- Explore Column -->
+          <div class="footer-column">
+            <h4 class="footer-title">Explore</h4>
+            <ul class="footer-links">
+              <li><a href="#">Commercial Lighting</a></li>
+              <li><a href="#">Recessed Lighting</a></li>
+              <li><a href="#">Landscape Lighting</a></li>
+              <li><a href="#">Light Bulbs</a></li>
+            </ul>
+          </div>
+
+          <!-- Account Column -->
+          <div class="footer-column">
+            <h4 class="footer-title">Account</h4>
+            <ul class="footer-links">
+              <li><a href="#">Sign In/Register</a></li>
+              <li><a href="#">Cart</a></li>
+              <li><a href="#">Order Status</a></li>
+            </ul>
+          </div>
+
+          <!-- About Us Column -->
+          <div class="footer-column">
+            <h4 class="footer-title">About Us</h4>
+            <ul class="footer-links">
+              <li><a href="#">Our Story</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <!-- Sitemap Column -->
+          <div class="footer-column">
+            <h4 class="footer-title">Sitemap</h4>
+            <ul class="footer-links">
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Product Categories</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            © 2025 USA Light and Electric, All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Experience Section Data
+      const experienceData = {
+        living: {
+          image: "living room.png",
+          markers: [
+            {
+              x: 10,
+              y: 55,
+              product: {
+                name: "Bedside lamp",
+                image:
+                  "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/LRG4-3018K-ORB-1.jpg",
+              },
+            },
+            {
+              x: 60,
+              y: 20,
+              product: {
+                name: "Designer ceiling Lamp",
+                image:
+                  "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/LED-SLDSKR-15-30W-5CCT-BLK-1.jpg",
+              },
+            },
+          ],
+        },
+        office: {
+          image: "office.png",
+          markers: [
+            {
+              x: 65,
+              y: 30,
+              product: {
+                name: "Ergonomic Office Chair",
+                image:
+                  "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/P10262-1.jpg",
+              },
+            },
+          ],
+        },
+        kitchen: {
+          image: "kitchen.png",
+          markers: [
+            {
+              x: 45,
+              y: 32,
+              product: {
+                name: "Under Cabinet Lighting",
+                image:
+                  "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/LED-SLDSKR-15-30W-5CCT-BLK-1.jpg",
+              },
+            },
+            {
+              x: 73,
+              y: 52,
+              product: {
+                name: "Pendant Kitchen Light",
+                image:
+                  "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/EL415CT5BZ-1.jpg",
+              },
+            },
+          ],
+        },
+      };
+
+      // DOM Elements
+      const experienceImage = document.getElementById("experienceImage");
+      const markersContainer = document.getElementById("markersContainer");
+      const experienceTabs = document.querySelectorAll(".experience-tab");
+      const popupOverlay = document.getElementById("popupOverlay");
+      const popupClose = document.getElementById("popupClose");
+      const popupImage = document.getElementById("popupImage");
+      const popupTitle = document.getElementById("popupTitle");
+
+      // State
+      let currentRoom = "living";
+      let activeCard = null;
+      let hideTimeout;
+      let isMobile = window.innerWidth <= 768;
+
+      // Utility function to check if device is mobile
+      function checkMobile() {
+        isMobile = window.innerWidth <= 768;
+      }
+
+      // Marker creation
+      function createMarker(marker, index) {
+        const markerElement = document.createElement("div");
+        markerElement.className = "marker";
+        markerElement.style.left = marker.x + "%";
+        markerElement.style.top = marker.y + "%";
+        markerElement.dataset.index = index;
+
+        // Create product card for desktop
+        const productCard = createProductCard(marker.product, index);
+        markersContainer.appendChild(productCard);
+
+        // Event listeners based on device type
+        if (isMobile) {
+          markerElement.addEventListener("click", (e) => {
+            e.stopPropagation();
+            showMobilePopup(marker.product);
+          });
+        } else {
+          // Desktop hover events
+          markerElement.addEventListener("mouseenter", (e) => {
+            clearTimeout(hideTimeout);
+            showProductCard(productCard, marker, e);
+          });
+
+          markerElement.addEventListener("mouseleave", () => {
+            hideTimeout = setTimeout(() => {
+              hideProductCard(productCard);
+            }, 300);
+          });
+
+          // Product card hover events
+          productCard.addEventListener("mouseenter", () => {
+            clearTimeout(hideTimeout);
+          });
+
+          productCard.addEventListener("mouseleave", () => {
+            hideTimeout = setTimeout(() => {
+              hideProductCard(productCard);
+            }, 300);
+          });
+        }
+
+        return markerElement;
+      }
+
+      // Product card creation
+      function createProductCard(product, index) {
+        const productCard = document.createElement("div");
+        productCard.className = "product-card";
+        productCard.dataset.cardIndex = index;
+
+        productCard.innerHTML = `
+                 <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/240x150?text=Image+Not+Found'" />
+                 <div class="product-card-content">
+                     <h3>${product.name}</h3>
+                 </div>
+             `;
+
+        return productCard;
+      }
+
+      // Desktop product card display
+      function showProductCard(productCard, marker, event) {
+        if (isMobile) return;
+
+        if (activeCard && activeCard !== productCard) {
+          activeCard.classList.remove("show");
+        }
+
+        const rect = markersContainer.getBoundingClientRect();
+        const markerRect = event.target
+          .closest(".marker")
+          .getBoundingClientRect();
+
+        const x = markerRect.left - rect.left;
+        const y = markerRect.top - rect.top;
+
+        let cardX = x + 50;
+        let cardY = y - 75;
+
+        // Boundary checks
+        if (cardX + 240 > rect.width) {
+          cardX = x - 250;
+        }
+        if (cardY < 0) {
+          cardY = y + 50;
+        }
+
+        productCard.style.left = cardX + "px";
+        productCard.style.top = cardY + "px";
+        productCard.classList.add("show");
+        activeCard = productCard;
+      }
+
+      function hideProductCard(productCard) {
+        if (isMobile) return;
+        productCard.classList.remove("show");
+        if (activeCard === productCard) {
+          activeCard = null;
+        }
+      }
+
+      // Mobile popup functions
+      function showMobilePopup(product) {
+        popupImage.src = product.image;
+        popupImage.alt = product.name;
+        popupTitle.textContent = product.name;
+        popupOverlay.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function hideMobilePopup() {
+        popupOverlay.classList.remove("show");
+        document.body.style.overflow = "";
+      }
+
+      // Hide all product cards
+      function hideAllProductCards() {
+        const allCards = markersContainer.querySelectorAll(".product-card");
+        allCards.forEach((card) => {
+          card.classList.remove("show");
+        });
+        activeCard = null;
+      }
+
+      // Update experience for room change
+      function updateExperience(roomType) {
+        const roomData = experienceData[roomType];
+
+        clearTimeout(hideTimeout);
+        hideAllProductCards();
+        hideMobilePopup();
+
+        experienceImage.style.opacity = "0";
+
+        setTimeout(() => {
+          experienceImage.src = roomData.image;
+          experienceImage.alt =
+            roomType.charAt(0).toUpperCase() + roomType.slice(1) + " Room";
+
+          markersContainer.innerHTML = "";
+
+          roomData.markers.forEach((marker, index) => {
+            markersContainer.appendChild(createMarker(marker, index));
+          });
+
+          experienceImage.style.opacity = "1";
+        }, 200);
+      }
+
+      // Event listeners
+      experienceTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          experienceTabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          currentRoom = tab.dataset.room;
+          updateExperience(currentRoom);
+        });
+      });
+
+      // Popup close events
+      popupClose.addEventListener("click", hideMobilePopup);
+      popupOverlay.addEventListener("click", (e) => {
+        if (e.target === popupOverlay) {
+          hideMobilePopup();
+        }
+      });
+
+      // Escape key to close popup
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && popupOverlay.classList.contains("show")) {
+          hideMobilePopup();
+        }
+      });
+
+      // Resize handler
+      window.addEventListener("resize", () => {
+        checkMobile();
+        hideAllProductCards();
+        hideMobilePopup();
+      });
+
+      // Initialize
+      checkMobile();
+      updateExperience(currentRoom);
+
+      // Carousel functionality
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+      const indicators = document.querySelectorAll(".indicator");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach((slide) => slide.classList.remove("active"));
+        indicators.forEach((indicator) => indicator.classList.remove("active"));
+
+        // Show current slide
+        slides[index].classList.add("active");
+        indicators[index].classList.add("active");
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      function prevSlide() {
+        currentSlide =
+          currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        showSlide(currentSlide);
+      }
+
+      // Event listeners
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+
+      // Indicator clicks
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+          currentSlide = index;
+          showSlide(currentSlide);
+        });
+      });
+
+      // Auto-advance carousel
+      //setInterval(nextSlide, 5000);
+
+      // Button click animations
+      document.querySelectorAll(".btn").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          this.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            this.style.transform = "scale(1)";
+          }, 150);
+          console.log("Button clicked:", this.textContent);
+        });
+      });
+
+      // Card hover effects
+      const cards = document.querySelectorAll(".card");
+      cards.forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+      class ResponsiveInfiniteFocusCarousel {
+        constructor() {
+          this.carousel = document.getElementById("tt-carousel");
+          this.prevBtn = document.getElementById("tt-prevBtn");
+          this.nextBtn = document.getElementById("tt-nextBtn");
+          this.dotsContainer = document.getElementById("tt-dots-container");
+          this.progressFill = document.getElementById("tt-progressFill");
+
+          this.testimonials = [
+            {
+              rating: 5,
+              content:
+                "I rarely put the time aside to do this but they have been a good supplier and thought it was a chance to express my thanks. I highly recommend these guys. Good luck to you USALIGHT.COM!",
+              name: "Herman",
+            },
+            {
+              rating: 5,
+              content:
+                "I ordered; you shipped; I received all in just 3 days. The lights were just as depicted on the website and all worked perfectly. I will order again in the future. Thanks!!",
+              name: "Paul Neuman",
+            },
+            {
+              rating: 5,
+              content:
+                "Excellent product and accurate description by seller. Two thumbs up! Thanks.",
+              name: "Muhammad Siddiqui",
+            },
+            {
+              rating: 5,
+              content:
+                "I ordered 12 low voltage landscape lights. Had issue with 2 bulbs. Tech support was extremely helpful and shipped out replacements right away. Probably the best customer service experience I've had on the internet",
+              name: "Aharui",
+            },
+            {
+              rating: 5,
+              content:
+                "I had a good experience with this company. I needed some landscaping lights for my back yard pool area, and they had some nifty Maui Lighting fixtures. The shipping was really quick, and they were available to answer a few of the questions I had about making sure I had the right stuff for my project. Good site...I would recommend them over 1000bulbs, for sure.",
+              name: "Calvert Williams",
+            },
+          ];
+
+          this.currentIndex = 0;
+          this.totalCards = this.testimonials.length;
+          this.autoPlayDuration = 5000; // Increased for better UX
+          this.transitionDuration = 600;
+          this.isTransitioning = false;
+          this.isAutoPlaying = true;
+          this.touchStartX = 0;
+          this.touchEndX = 0;
+          this.minSwipeDistance = 50;
+
+          this.init();
+        }
+
+        init() {
+          this.createCards();
+          this.createDots();
+          this.updateLayout();
+          this.bindEvents();
+          this.startAutoPlay();
+          this.handleResize();
+        }
+
+        createCards() {
+          this.carousel.innerHTML = "";
+
+          this.testimonials.forEach((testimonial, index) => {
+            const card = document.createElement("div");
+            card.className = "tt-testimonial-card";
+            card.dataset.index = index;
+            card.setAttribute("role", "tabpanel");
+            card.setAttribute(
+              "aria-label",
+              `Testimonial ${index + 1} of ${this.totalCards}`
+            );
+
+            const ratingHTML = Array(testimonial.rating)
+              .fill()
+              .map(
+                () => `
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#B2AD9C" viewBox="0 0 24 24" aria-hidden="true">
+                                 <path d="M12 0l3.7 7.9 8.3 1.3-6 6.1 1.4 8.7L12 19.9 4.6 24l1.4-8.7-6-6.1 8.3-1.3L12 0z"/>
+                             </svg>
+                         `
+              )
+              .join("");
+
+            card.innerHTML = `
+                         <div class="tt-rating" aria-label="${testimonial.rating} out of 5 stars">
+                             ${ratingHTML}
+                         </div>
+                         <p class="tt-testimonial-content">"${testimonial.content}"</p>
+                         <div class="tt-reviewer-info">
+                             <p class="tt-reviewer-name">— ${testimonial.name}</p>
+                         </div>
+                     `;
+
+            this.carousel.appendChild(card);
+          });
+
+          this.allCards = Array.from(
+            this.carousel.querySelectorAll(".tt-testimonial-card")
+          );
+        }
+
+        createDots() {
+          this.dotsContainer.innerHTML = "";
+
+          for (let i = 0; i < this.totalCards; i++) {
+            const dot = document.createElement("button");
+            dot.className = "tt-dot";
+            dot.setAttribute("role", "tab");
+            dot.setAttribute("aria-label", `Go to testimonial ${i + 1}`);
+            dot.setAttribute(
+              "aria-selected",
+              i === this.currentIndex ? "true" : "false"
+            );
+
+            if (i === this.currentIndex) {
+              dot.classList.add("tt-active");
+            }
+
+            dot.addEventListener("click", () => this.goToSlide(i));
+            this.dotsContainer.appendChild(dot);
+          }
+
+          this.dots = Array.from(
+            this.dotsContainer.querySelectorAll(".tt-dot")
+          );
+        }
+
+        // Pause carousel when any popup/modal is open
+        pauseForPopup() {
+          this.wasAutoPlaying = this.isAutoPlaying;
+          this.pauseAutoPlay();
+        }
+
+        // Resume carousel when popup/modal is closed
+        resumeFromPopup() {
+          if (this.wasAutoPlaying) {
+            this.isAutoPlaying = true;
+            this.startAutoPlay();
+          }
+        }
+
+        bindEvents() {
+          // Button events
+          this.prevBtn.addEventListener("click", () => this.prevSlide());
+          this.nextBtn.addEventListener("click", () => this.nextSlide());
+
+          // Mouse events
+          this.carousel.addEventListener("mouseenter", () =>
+            this.pauseAutoPlay()
+          );
+          this.carousel.addEventListener("mouseleave", () =>
+            this.resumeAutoPlay()
+          );
+
+          // Touch events for swipe
+          this.carousel.addEventListener(
+            "touchstart",
+            (e) => this.handleTouchStart(e),
+            { passive: true }
+          );
+          this.carousel.addEventListener(
+            "touchend",
+            (e) => this.handleTouchEnd(e),
+            { passive: true }
+          );
+
+          // Keyboard events
+          this.carousel.addEventListener("keydown", (e) =>
+            this.handleKeyDown(e)
+          );
+
+          // Resize handler
+          window.addEventListener("resize", () =>
+            this.debounce(this.handleResize.bind(this), 250)
+          );
+
+          // Visibility change handler
+          document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+              this.pauseAutoPlay();
+            } else if (this.isAutoPlaying) {
+              this.resumeAutoPlay();
+            }
+          });
+
+          // Listen for popup/modal events
+          document.addEventListener("popupOpened", () => this.pauseForPopup());
+          document.addEventListener("popupClosed", () =>
+            this.resumeFromPopup()
+          );
+
+          // Listen for generic modal events
+          document.addEventListener("modalOpened", () => this.pauseForPopup());
+          document.addEventListener("modalClosed", () =>
+            this.resumeFromPopup()
+          );
+
+          // Check for common popup/modal indicators
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === 1) {
+                  // Check for popup/modal classes or styles
+                  if (
+                    node.classList?.contains("popup-overlay") ||
+                    node.classList?.contains("modal") ||
+                    node.classList?.contains("show") ||
+                    node.style?.position === "fixed"
+                  ) {
+                    this.pauseForPopup();
+                  }
+                }
+              });
+
+              mutation.removedNodes.forEach((node) => {
+                if (node.nodeType === 1) {
+                  if (
+                    node.classList?.contains("popup-overlay") ||
+                    node.classList?.contains("modal")
+                  ) {
+                    this.resumeFromPopup();
+                  }
+                }
+              });
+            });
+          });
+
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ["class", "style"],
+          });
+
+          this.popupObserver = observer;
+        }
+
+        handleTouchStart(e) {
+          this.touchStartX = e.touches[0].clientX;
+        }
+
+        handleTouchEnd(e) {
+          this.touchEndX = e.changedTouches[0].clientX;
+          this.handleSwipe();
+        }
+
+        handleSwipe() {
+          const swipeDistance = this.touchStartX - this.touchEndX;
+
+          if (Math.abs(swipeDistance) > this.minSwipeDistance) {
+            if (swipeDistance > 0) {
+              this.nextSlide(); // Swipe left - next slide
+            } else {
+              this.prevSlide(); // Swipe right - previous slide
+            }
+          }
+        }
+
+        handleKeyDown(e) {
+          switch (e.key) {
+            case "ArrowLeft":
+              e.preventDefault();
+              this.prevSlide();
+              break;
+            case "ArrowRight":
+              e.preventDefault();
+              this.nextSlide();
+              break;
+            case " ":
+            case "Enter":
+              e.preventDefault();
+              this.toggleAutoPlay();
+              break;
+          }
+        }
+
+        handleResize() {
+          // Recalculate layout on resize
+          this.updateLayout();
+        }
+
+        debounce(func, wait) {
+          clearTimeout(this.debounceTimer);
+          this.debounceTimer = setTimeout(func, wait);
+        }
+
+        updateDots() {
+          this.dots.forEach((dot, i) => {
+            const isActive = i === this.currentIndex;
+            dot.classList.toggle("tt-active", isActive);
+            dot.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+        }
+
+        updateLayout() {
+          this.allCards.forEach((card, i) => {
+            card.classList.remove("tt-prev", "tt-active", "tt-next");
+
+            if (i === this.currentIndex) {
+              card.classList.add("tt-active");
+              card.setAttribute("aria-hidden", "false");
+            } else if (
+              i ===
+              (this.currentIndex - 1 + this.totalCards) % this.totalCards
+            ) {
+              card.classList.add("tt-prev");
+              card.setAttribute("aria-hidden", "true");
+            } else if (i === (this.currentIndex + 1) % this.totalCards) {
+              card.classList.add("tt-next");
+              card.setAttribute("aria-hidden", "true");
+            } else {
+              card.setAttribute("aria-hidden", "true");
+            }
+          });
+
+          this.updateDots();
+        }
+
+        nextSlide() {
+          if (this.isTransitioning) return;
+          this.performSlideTransition(
+            (this.currentIndex + 1) % this.totalCards
+          );
+        }
+
+        prevSlide() {
+          if (this.isTransitioning) return;
+          this.performSlideTransition(
+            (this.currentIndex - 1 + this.totalCards) % this.totalCards
+          );
+        }
+
+        goToSlide(index) {
+          if (this.isTransitioning || index === this.currentIndex) return;
+          this.performSlideTransition(index);
+        }
+
+        performSlideTransition(newIndex) {
+          this.isTransitioning = true;
+          this.currentIndex = newIndex;
+          this.updateLayout();
+
+          setTimeout(() => {
+            this.isTransitioning = false;
+          }, this.transitionDuration);
+
+          this.restartAutoPlay();
+        }
+
+        pauseAutoPlay() {
+          if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+          }
+          if (this.progressInterval) {
+            clearInterval(this.progressInterval);
+            this.progressInterval = null;
+          }
+          if (this.progressFill) {
+            this.progressFill.style.width = "0%";
+          }
+        }
+
+        resumeAutoPlay() {
+          if (this.isAutoPlaying) {
+            this.startAutoPlay();
+          }
+        }
+
+        startAutoPlay() {
+          this.pauseAutoPlay();
+          this.startTime = Date.now();
+
+          this.autoPlayInterval = setInterval(() => {
+            if (!this.isTransitioning) {
+              this.nextSlide();
+              this.startTime = Date.now();
+            }
+          }, this.autoPlayDuration);
+
+          this.updateProgressBar();
+        }
+
+        restartAutoPlay() {
+          if (this.isAutoPlaying) {
+            this.startAutoPlay();
+          }
+        }
+
+        toggleAutoPlay() {
+          this.isAutoPlaying = !this.isAutoPlaying;
+          if (this.isAutoPlaying) {
+            this.startAutoPlay();
+          } else {
+            this.pauseAutoPlay();
+          }
+        }
+
+        updateProgressBar() {
+          if (!this.progressFill) return;
+
+          this.progressFill.style.width = "0%";
+
+          this.progressInterval = setInterval(() => {
+            const elapsed = Date.now() - this.startTime;
+            const percentage = Math.min(
+              (elapsed / this.autoPlayDuration) * 100,
+              100
+            );
+            this.progressFill.style.width = percentage + "%";
+          }, 50);
+        }
+
+        // Public method to destroy the carousel
+        destroy() {
+          this.pauseAutoPlay();
+          window.removeEventListener("resize", this.handleResize);
+          document.removeEventListener(
+            "visibilitychange",
+            this.handleVisibilityChange
+          );
+          document.removeEventListener("popupOpened", this.pauseForPopup);
+          document.removeEventListener("popupClosed", this.resumeFromPopup);
+          document.removeEventListener("modalOpened", this.pauseForPopup);
+          document.removeEventListener("modalClosed", this.resumeFromPopup);
+
+          if (this.popupObserver) {
+            this.popupObserver.disconnect();
+          }
+
+          clearTimeout(this.debounceTimer);
+        }
+      }
+
+      // Initialize carousel when DOM is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        window.testimonialCarousel = new ResponsiveInfiniteFocusCarousel();
+      });
+
+      // Clean up on page unload
+      window.addEventListener("beforeunload", () => {
+        if (window.testimonialCarousel) {
+          window.testimonialCarousel.destroy();
+        }
+      });
+    </script>
   </body>
 </html>
