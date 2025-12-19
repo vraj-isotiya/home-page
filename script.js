@@ -98,18 +98,18 @@ const experienceData = [
         x: 58,
         y: 5,
         product: {
-          name: "Ergonomic Office Chair",
+          name: "Surface-Mounted LED Ceiling Light",
           image:
-            "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/P10262-1.jpg",
+            "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/LRG4-3018K-ORB-1.jpg",
         },
       },
       {
         x: 72,
         y: 47,
         product: {
-          name: "Ergonomic Office Chair",
+          name: "LED Desk Lamp",
           image:
-            "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/P10262-1.jpg",
+            "https://cdn4.volusion.store/sjrzx-uggtc/v/vspfiles/photos/LRG4-3018K-ORB-1.jpg",
         },
       },
     ],

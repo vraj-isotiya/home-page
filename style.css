@@ -1647,14 +1647,15 @@ Dropdown indicator */
 }
 
 .tt-footer-container {
-  width: 80%;
+  /* max-width: 1200px; */
+  width: 100%;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 .tt-footer-content {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
   margin-bottom: 40px;
 }
@@ -1664,8 +1665,8 @@ Dropdown indicator */
 }
 
 .tt-footer-logo {
-  width: 300px;
-  margin-bottom: 20px;
+  max-width: 240px;
+  width: 100%;
 }
 
 .tt-footer-logo img {
@@ -2037,7 +2038,6 @@ Dropdown indicator */
 
   .tt-newsletter-section {
     padding: clamp(40px, 8vw, 60px) clamp(15px, 3vw, 25px);
-    border-radius: 20px;
   }
 
   .tt-newsletter-container h2::before {
@@ -2056,7 +2056,7 @@ Dropdown indicator */
 
 @media (max-width: 640px) {
   body {
-    padding: 20px 10px;
+    padding: 20px 0px;
   }
 
   .tt-cards-section {
@@ -2206,10 +2206,6 @@ Dropdown indicator */
     border-radius: 15px;
   }
 
-  .tt-newsletter-section {
-    border-radius: 15px;
-  }
-
   .tt-newsletter-container h2::before {
     top: -20px;
     font-size: 1.2rem;
@@ -2253,7 +2249,7 @@ Dropdown indicator */
 }
 
 /* new section */
-/* Layout Container */
+
 .categories {
   max-width: 1400px;
   padding: 60px 20px;
@@ -2509,5 +2505,45 @@ Dropdown indicator */
 
   .deal-card {
     padding: 16px;
+  }
+}
+
+/* ----------------------------------------------------- */
+@media (max-width: 991px) {
+  .tt-header-navigation {
+    display: none;
+  }
+
+  .tt-header-toggle {
+    display: block;
+  }
+
+  .tt-header-inn {
+    padding: 16px 20px;
+  }
+}
+@media (max-width: 991px) {
+  #tt-menu ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #tt-menu ul li {
+    width: 100%;
+    margin: 0;
+  }
+
+  #tt-menu ul li a {
+    padding: 12px 0;
+  }
+}
+@media (max-width: 991px) {
+  .tt-d-lg-block {
+    display: none;
+  }
+
+  .tt-mobile_quote_btn {
+    display: block;
+    margin-top: 20px;
   }
 }
