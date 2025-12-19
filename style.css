@@ -1546,8 +1546,8 @@ Dropdown indicator */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ef3939 0%, #d63031 100%);
-  color: #e9e6dd;
+  background: #e9e6dd;
+  color: #454136;
   gap: 8px;
   padding: clamp(14px, 2.5vw, 18px) clamp(24px, 4vw, 32px);
   border: 2px solid white;
@@ -1566,6 +1566,78 @@ Dropdown indicator */
 
 .tt-newsletter-btn:active {
   transform: translateY(-1px);
+}
+
+.tt-newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: #e9e6dd;
+  color: #454136;
+
+  padding: clamp(14px, 2.5vw, 18px) clamp(24px, 4vw, 32px);
+  border: 2px solid #ffffff;
+  border-radius: 60px;
+
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  cursor: pointer;
+  min-width: 140px;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: background-color 0.35s ease, color 0.35s ease,
+    transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Shine sweep */
+.tt-newsletter-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+/* Hover */
+.tt-newsletter-btn:hover::before {
+  left: 100%;
+}
+
+.tt-newsletter-btn:hover {
+  color: #2f2c24;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Active (pressed) */
+.tt-newsletter-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Keyboard accessibility */
+.tt-newsletter-btn:focus-visible {
+  outline: 2px solid #454136;
+  outline-offset: 3px;
 }
 
 /* Footer Styles */
