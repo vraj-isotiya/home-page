@@ -45,7 +45,7 @@ a:focus {
 
 /* Header Styles */
 .tt-header-area {
-  margin-bottom: 30px;
+  margin-bottom: 16px;
 }
 
 .tt-header-inn {
@@ -280,7 +280,7 @@ Dropdown indicator */
 .tt-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 /* Carousel Section */
@@ -373,10 +373,59 @@ Dropdown indicator */
 .tt-btn-primary {
   background-color: #cd3838;
   color: #e9e6dd;
+  padding: 12px 44px;
 }
 
 .tt-btn-primary:hover {
   background-color: #d32f2f;
+}
+/* ----------------------- */
+.tt-btn-primary {
+  position: relative; /* REQUIRED for ::before */
+  overflow: hidden; /* REQUIRED to clip shine */
+  display: inline-block;
+
+  background-color: #cd3838;
+  color: #e9e6dd;
+  padding: 12px 44px;
+
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Shine sweep */
+.tt-btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+
+  transition: left 0.5s ease;
+  pointer-events: none; /* critical */
+}
+
+/* Hover state */
+.tt-btn-primary:hover::before {
+  left: 100%;
+}
+
+.tt-btn-primary:hover {
+  background-color: rgba(205, 56, 56, 0.9);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(205, 56, 56, 0.35);
 }
 
 .tt-btn-secondary {
@@ -1321,8 +1370,8 @@ Dropdown indicator */
   color: #fff;
   position: relative;
   overflow: hidden;
-  border-radius: 30px;
   margin: 0 auto;
+  background-color: #cd3838;
 }
 
 .tt-newsletter-section::before {
@@ -1449,7 +1498,7 @@ Dropdown indicator */
   width: 100%;
   padding: clamp(14px, 2.5vw, 18px) clamp(50px, 8vw, 60px)
     clamp(14px, 2.5vw, 18px) clamp(18px, 3vw, 24px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   font-size: clamp(0.9rem, 1.5vw, 1rem);
@@ -1501,7 +1550,7 @@ Dropdown indicator */
   color: #e9e6dd;
   gap: 8px;
   padding: clamp(14px, 2.5vw, 18px) clamp(24px, 4vw, 32px);
-  border: none;
+  border: 2px solid white;
   border-radius: 60px;
   font-weight: 600;
   font-size: clamp(0.9rem, 1.5vw, 1rem);
@@ -1523,7 +1572,6 @@ Dropdown indicator */
 .tt-footer-area {
   background: #29323d;
   padding: 50px 0 20px;
-  margin-top: 30px;
 }
 
 .tt-footer-container {
@@ -2289,7 +2337,7 @@ Dropdown indicator */
 ========================= */
 .deal-card {
   position: relative;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   border: 1px solid #b2ad9c;
   border-radius: 8px;
@@ -2357,7 +2405,6 @@ Dropdown indicator */
   line-height: 1.4;
   color: #b2ad9c; /* Kept original color */
   text-decoration: none;
-  margin-top: auto; /* Pushes name to bottom if prices vary in height */
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 40px;
